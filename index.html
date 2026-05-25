@@ -1,0 +1,2173 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Sunda to Madura Learning | Premium Edu</title>
+
+    <!-- Font Sesuai Desain -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Phosphor Icons untuk Grafis yang Menarik -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Konfigurasi Tema Kustom Tailwind -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          screens: {
+            xs: "375px",
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+          },
+          extend: {
+            fontFamily: {
+              sans: ["Poppins", "sans-serif"],
+              inter: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#6C4DFF",
+              "primary-dark": "#4B2ECC",
+              "primary-light": "#8B7BFF",
+              bglight: "#F5F3FF",
+              bgdark: "#0F0B1F",
+              carddark: "#1A1438",
+              textgray: "#94A3B8",
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "fade-in": "fadeIn 0.5s ease-out forwards",
+              "slide-up": "slideUp 0.5s ease-out forwards",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Transisi halus saat berganti tema gelap/terang */
+      body {
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      /* Efek Glassmorphism Mode Terang */
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(108, 77, 255, 0.05);
+      }
+
+      /* Efek Glassmorphism Mode Gelap */
+      .dark .glass {
+        background: rgba(26, 20, 56, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      }
+
+      .text-gradient {
+        background: linear-gradient(to right, #6c4dff, #8b7bff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Kustomisasi Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+
+      /* Ornamen Latar Belakang (Ambient Blobs) */
+      .blob {
+        position: absolute;
+        filter: blur(80px);
+        z-index: -1;
+        opacity: 0.4;
+        border-radius: 50%;
+      }
+      .dark .blob {
+        opacity: 0.2;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 9999;
+      }
+      .toast.show {
+        bottom: 24px;
+      }
+
+      .hide {
+        display: none !important;
+      }
+      .section-view {
+        display: none;
+        animation: fadeIn 0.4s ease-out;
+      }
+      .section-view.active {
+        display: block;
+      }
+
+      /* IOS Safe Area Padding */
+      @supports (padding: env(safe-area-inset-top)) {
+        .safe-padding-top {
+          padding-top: env(safe-area-inset-top);
+        }
+        .safe-padding-bottom {
+          padding-bottom: env(safe-area-inset-bottom);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-bglight dark:bg-bgdark text-slate-800 dark:text-slate-200 overflow-x-hidden font-sans antialiased h-full flex flex-col relative">
+    <!-- Ornamen Estetik Ambient Latar Belakang -->
+    <div class="blob bg-primary-light w-72 h-72 sm:w-96 sm:h-96 top-[-5%] left-[-5%] animate-float"></div>
+    <div class="blob bg-purple-400 w-80 h-80 sm:w-[500px] sm:h-[500px] bottom-[-10%] right-[-5%] animate-float" style="animation-delay: -3s"></div>
+
+    <!-- TAMPILAN PERTAMA (ONBOARDING SCREEN) -->
+    <div id="onboardingScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-bglight/95 dark:bg-bgdark/95 backdrop-blur-md transition-opacity duration-500 overflow-y-auto">
+      <div class="glass w-full max-w-md p-6 sm:p-8 rounded-3xl animate-slide-up text-center my-auto">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-tr from-primary to-primary-light rounded-2xl flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-lg shadow-primary/30">
+          <i class="ph ph-translate text-3xl sm:text-4xl text-white"></i>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold mb-2">Wilujeng Sumping!</h1>
+        <p class="text-textgray mb-6 sm:text-sm text-xs leading-relaxed">
+          Mulai belajar bahasa Sunda ke Madura dengan kurikulum materi terlengkap. Masukkan nama Anda untuk menyimpan progress belajar.
+        </p>
+
+        <!-- Input minimal 16px font size pada mobile untuk mencegah iOS Safari Auto-Zoom -->
+        <input
+          type="text"
+          id="userNameInput"
+          placeholder="Nama Panggilan Anda"
+          class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 sm:py-4 mb-4 focus:ring-2 focus:ring-primary outline-none transition-all dark:text-white text-base"
+          autocomplete="off"
+        />
+
+        <button
+          onclick="app.startLearning()"
+          class="w-full bg-gradient-to-r from-primary to-primary-dark text-white font-semibold py-3.5 sm:py-4 rounded-xl shadow-lg shadow-primary/30 hover:shadow-primary/50 transform hover:-translate-y-1 transition-all text-sm sm:text-base min-h-[48px]"
+        >
+          Mulai Belajar
+        </button>
+      </div>
+    </div>
+
+    <!-- TAMPILAN UTAMA APLIKASI -->
+    <div id="mainApp" class="hide flex-1 flex flex-col md:flex-row h-screen md:h-[100dvh] overflow-hidden">
+      <!-- SIDEBAR NAVIGASI (Responsif Desktop & Mobile) -->
+      <aside
+        id="sidebar"
+        class="fixed inset-y-0 left-0 z-40 w-64 glass border-r border-white/20 transform -translate-x-full md:translate-x-0 transition-transform duration-300 md:relative flex flex-col safe-padding-top safe-padding-bottom"
+      >
+        <div class="p-5 sm:p-6 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-gradient-to-tr from-primary to-primary-light rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
+              <i class="ph ph-translate text-xl text-white"></i>
+            </div>
+            <span class="font-bold text-lg leading-tight">Sunda<br /><span class="text-primary">Madura</span></span>
+          </div>
+          <button onclick="app.toggleSidebar()" class="md:hidden text-textgray hover:text-primary p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <i class="ph ph-x text-2xl"></i>
+          </button>
+        </div>
+
+        <nav class="flex-1 px-4 py-2 space-y-1 overflow-y-auto">
+          <button
+            onclick="app.switchTab('dashboard')"
+            class="nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-squares-four text-xl"></i> Dashboard
+          </button>
+          <button
+            onclick="app.switchTab('learn')"
+            class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-book-open-text text-xl"></i> Materi Belajar
+          </button>
+          <button
+            onclick="app.switchTab('translator')"
+            class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-swap text-xl"></i> Translator
+          </button>
+          <button
+            onclick="app.switchTab('quiz')"
+            class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-game-controller text-xl"></i> Kuis & Latihan
+          </button>
+          <button
+            onclick="app.switchTab('ai')"
+            class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-robot text-xl"></i> AI Assistant
+          </button>
+          <button
+            onclick="app.switchTab('leaderboard')"
+            class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all text-textgray hover:bg-primary/10 hover:text-primary min-h-[48px]"
+          >
+            <i class="ph ph-medal text-xl"></i> Leaderboard
+          </button>
+        </nav>
+
+        <!-- Menu Profil Pengguna di Bagian Bawah Sidebar -->
+        <div class="p-4 mt-auto">
+          <div class="glass p-4 rounded-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-16 h-16 bg-primary/20 blur-xl rounded-full"></div>
+            <div class="flex items-center gap-3 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-primary flex-shrink-0" id="sidebarAvatar">U</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-sm truncate" id="sidebarName">User</p>
+                <p class="text-xs text-textgray">Level <span id="sidebarLevel">1</span></p>
+              </div>
+              <div class="flex items-center gap-1">
+                <button onclick="app.switchTab('settings')" class="text-textgray hover:text-primary p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center" title="Pengaturan">
+                  <i class="ph ph-gear text-lg"></i>
+                </button>
+                <button onclick="app.logout()" class="text-textgray hover:text-red-500 p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center" title="Keluar">
+                  <i class="ph ph-sign-out text-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Overlay Gelap untuk Sidebar Seluler -->
+      <div id="sidebarOverlay" onclick="app.toggleSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden backdrop-blur-sm"></div>
+
+      <!-- AREA UTAMA KONTEN -->
+      <main class="flex-1 flex flex-col h-full overflow-hidden relative safe-padding-top safe-padding-bottom">
+        <!-- HEADER NAVIGASI ATAS -->
+        <header class="h-20 glass border-b border-white/10 flex items-center justify-between px-4 sm:px-6 md:px-8 z-20 flex-shrink-0">
+          <div class="flex items-center gap-3 sm:gap-4">
+            <button onclick="app.toggleSidebar()" class="md:hidden p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-primary min-w-[44px] min-h-[44px] flex items-center justify-center">
+              <i class="ph ph-list text-2xl"></i>
+            </button>
+            <h2 id="topBarTitle" class="text-lg sm:text-xl font-bold">Dashboard</h2>
+          </div>
+
+          <!-- Statistik Cepat Pengguna -->
+          <div class="flex items-center gap-2 sm:gap-4">
+            <div class="flex items-center gap-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold">
+              <i class="ph-fill ph-fire"></i>
+              <span id="streakCount" class="whitespace-nowrap">0 Hari</span>
+            </div>
+            <div class="flex items-center gap-1 bg-primary/10 text-primary px-2 sm:px-3 py-1.5 rounded-full text-xs font-semibold">
+              <i class="ph-fill ph-star"></i>
+              <span id="xpCount" class="whitespace-nowrap">0 XP</span>
+            </div>
+            <button
+              onclick="app.toggleTheme()"
+              class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition flex-shrink-0 min-w-[40px]"
+            >
+              <i class="ph ph-moon text-xl dark:hidden"></i>
+              <i class="ph ph-sun text-xl hidden dark:block text-yellow-400"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- KONTEN SCROLLABLE -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 scroll-smooth" id="mainScrollArea">
+          <!-- TAB 1: DASHBOARD VIEW -->
+          <div id="view-dashboard" class="section-view active">
+            <div class="mb-6 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-4">
+              <div>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold mb-1">Halo, <span id="dashName" class="text-gradient font-extrabold">Pelajar</span> 👋</h1>
+                <p class="text-textgray text-xs sm:text-sm">Siap menguasai bahasa daerah hari ini? Akses materi terlengkap di bawah.</p>
+              </div>
+            </div>
+
+            <!-- Kartu Statistik Utama -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+              <div class="glass p-3 sm:p-4 rounded-2xl flex flex-col gap-1 hover:-translate-y-1 transition-transform">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg mb-1">
+                  <i class="ph-fill ph-book-open"></i>
+                </div>
+                <p class="text-[10px] sm:text-xs text-textgray">Materi Tersedia</p>
+                <h3 class="text-lg sm:text-2xl font-bold" id="statLessons">100+</h3>
+              </div>
+              <div class="glass p-3 sm:p-4 rounded-2xl flex flex-col gap-1 hover:-translate-y-1 transition-transform">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg mb-1">
+                  <i class="ph-fill ph-lightning"></i>
+                </div>
+                <p class="text-[10px] sm:text-xs text-textgray">Daily Streak</p>
+                <h3 class="text-lg sm:text-2xl font-bold" id="statStreak">0</h3>
+              </div>
+              <div class="glass p-3 sm:p-4 rounded-2xl flex flex-col gap-1 hover:-translate-y-1 transition-transform">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center text-lg mb-1">
+                  <i class="ph-fill ph-target"></i>
+                </div>
+                <p class="text-[10px] sm:text-xs text-textgray">Akurasi Kuis</p>
+                <h3 class="text-lg sm:text-2xl font-bold" id="statAccuracy">0%</h3>
+              </div>
+              <div class="glass p-3 sm:p-4 rounded-2xl flex flex-col gap-1 hover:-translate-y-1 transition-transform">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 text-primary dark:text-primary-light flex items-center justify-center text-lg mb-1">
+                  <i class="ph-fill ph-translate"></i>
+                </div>
+                <p class="text-[10px] sm:text-xs text-textgray">Kamus Terpadu</p>
+                <h3 class="text-lg sm:text-2xl font-bold" id="statTrans">Aktif</h3>
+              </div>
+            </div>
+
+            <!-- Bar Progress Level -->
+            <div class="glass p-4 sm:p-6 rounded-3xl mb-6 sm:mb-8">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-4">
+                <div>
+                  <h3 class="text-sm sm:text-base md:text-lg font-bold">Level Saat Ini: <span class="text-primary" id="currentLevelDisplay">Pemula (Lv 1)</span></h3>
+                  <p class="text-[11px] sm:text-xs md:text-sm text-textgray" id="xpToNext">Butuh 150 XP ke Level 2</p>
+                </div>
+                <div class="text-left sm:text-right"><span class="text-lg sm:text-2xl font-bold text-primary" id="currentXpDisplay">0</span> <span class="text-xs text-textgray">XP</span></div>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
+                <div id="levelProgressBar" class="bg-gradient-to-r from-primary to-primary-light h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Menu Akses Cepat -->
+            <h3 class="text-base sm:text-lg font-bold mb-4">Mulai Cepat</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div onclick="app.switchTab('learn')" class="glass p-4 sm:p-5 rounded-3xl cursor-pointer group hover:border-primary/50 transition-all flex items-center gap-3 sm:gap-4 min-h-[80px]">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                  <i class="ph-fill ph-play-circle text-2xl sm:text-3xl text-primary"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-xs sm:text-sm md:text-base truncate">Materi Belajar & Modul</h4>
+                  <p class="text-[11px] sm:text-xs text-textgray truncate">Eksplorasi modul pembelajaran komprehensif!</p>
+                </div>
+              </div>
+              <div onclick="app.switchTab('quiz')" class="glass p-4 sm:p-5 rounded-3xl cursor-pointer group hover:border-primary/50 transition-all flex items-center gap-3 sm:gap-4 min-h-[80px]">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                  <i class="ph-fill ph-sword text-2xl sm:text-3xl text-amber-500"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-xs sm:text-sm md:text-base truncate">Kuis Interaktif</h4>
+                  <p class="text-[11px] sm:text-xs text-textgray truncate">Uji ingatan Anda dengan kuis adaptif!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: LEARN VIEW (Kategori Belajar) -->
+          <div id="view-learn" class="section-view">
+            <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center mb-6">
+              <div>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100">Kategori Modul Utama</h2>
+                <p class="text-xs text-textgray mt-1">Pilih salah satu topik pembelajaran di bawah ini untuk memulai.</p>
+              </div>
+            </div>
+
+            <!-- Kisi Kategori -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" id="categoryGrid">
+              <!-- Diisi menggunakan JavaScript secara dinamis -->
+            </div>
+          </div>
+
+          <!-- SUB-VIEW: DETAIL MATERI (Flashcards) -->
+          <div id="view-lesson-detail" class="section-view">
+            <button onclick="app.switchTab('learn')" class="mb-6 flex items-center gap-2 text-textgray hover:text-primary transition p-2 min-h-[44px]">
+              <i class="ph ph-arrow-left text-xl"></i> Kembali ke Kategori
+            </button>
+
+            <div class="glass p-5 sm:p-6 md:p-8 rounded-3xl mb-6 relative overflow-hidden">
+              <div class="absolute -right-10 -top-10 text-[100px] sm:text-[150px] opacity-5 text-primary">
+                <i class="ph-fill ph-book-open"></i>
+              </div>
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2" id="lessonTitle">Judul Materi</h2>
+              <p class="text-textgray text-xs sm:text-sm mb-4" id="lessonDesc">Ketuk "Pelajari" pada setiap kartu kosakata untuk mengklaim bonus XP harian!</p>
+
+              <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 mb-4">
+                <div id="lessonProgress" class="bg-primary h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+
+            <div class="space-y-4" id="lessonItemsList">
+              <!-- Diisi oleh JS -->
+            </div>
+          </div>
+
+          <!-- TAB 3: TRANSLATOR VIEW (Kamus / Translator) -->
+          <div id="view-translator" class="section-view">
+            <div class="glass p-4 sm:p-6 md:p-8 rounded-3xl max-w-4xl mx-auto">
+              <div class="flex flex-row items-center justify-between gap-3 mb-6">
+                <h2 class="text-lg sm:text-xl md:text-2xl font-bold">Kamus Pintar</h2>
+                <button onclick="app.openHistoryModal()" class="glass px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-primary hover:text-white transition min-h-[38px]">
+                  <i class="ph ph-clock-counter-clockwise text-base"></i> Riwayat
+                </button>
+              </div>
+
+              <!-- Flex container adaptif untuk translator mobile & desktop -->
+              <div class="flex flex-col md:flex-row gap-4 items-stretch relative">
+                <!-- Kolom Masukan (Kiri) -->
+                <div class="flex-1 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden bg-white/50 dark:bg-slate-800/50 focus-within:border-primary transition-colors">
+                  <div class="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800">
+                    <span class="font-semibold text-primary text-sm" id="labelInputLang">Sunda</span>
+                    <button
+                      onclick="app.speak(document.getElementById('transInput').value, 'id-ID')"
+                      class="text-textgray hover:text-primary p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
+                      title="Dengar Input"
+                    >
+                      <i class="ph ph-speaker-high text-lg"></i>
+                    </button>
+                  </div>
+                  <textarea id="transInput" rows="4" class="w-full bg-transparent p-4 outline-none resize-none text-base md:text-sm" placeholder="Ketik kata atau kalimat di sini..."></textarea>
+                </div>
+
+                <!-- Tombol Tukar Bahasa (Swap) -->
+                <div class="flex md:items-center justify-center self-center z-10 md:px-2 py-1 md:py-0">
+                  <button
+                    onclick="app.swapLanguages()"
+                    id="btnSwapLang"
+                    class="w-10 h-10 sm:w-12 sm:h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 md:-rotate-90 p-2 min-w-[40px] min-h-[40px]"
+                  >
+                    <i class="ph ph-arrows-down-up text-lgsm:text-xl"></i>
+                  </button>
+                </div>
+
+                <!-- Kolom Hasil (Kanan) -->
+                <div class="flex-1 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden bg-white/50 dark:bg-slate-800/50">
+                  <div class="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800">
+                    <span class="font-semibold text-amber-500 text-sm" id="labelOutputLang">Madura</span>
+                    <div class="flex gap-1">
+                      <button
+                        onclick="app.copyToClipboard('transOutput')"
+                        class="text-textgray hover:text-primary p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
+                        title="Salin Terjemahan"
+                      >
+                        <i class="ph ph-copy text-lg"></i>
+                      </button>
+                      <button
+                        onclick="app.speak(document.getElementById('transOutput').value, 'id-ID')"
+                        class="text-textgray hover:text-primary p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
+                        title="Dengar Hasil"
+                      >
+                        <i class="ph ph-speaker-high text-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <textarea
+                    id="transOutput"
+                    rows="4"
+                    class="w-full bg-transparent p-4 outline-none resize-none text-base md:text-sm"
+                    readonly
+                    placeholder="Terjemahan akan muncul di sini..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <button
+                onclick="app.translate()"
+                class="w-full mt-6 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold py-3.5 rounded-xl shadow-lg hover:shadow-primary/50 transition-all flex items-center justify-center gap-2 min-h-[48px] text-sm sm:text-base"
+              >
+                <i class="ph ph-magic-wand"></i> Terjemahkan Sekarang
+              </button>
+            </div>
+          </div>
+
+          <!-- MODAL RIWAYAT TERJEMAHAN -->
+          <div id="transHistoryModal" class="fixed inset-0 bg-black/60 z-50 backdrop-blur-md flex items-center justify-center p-4 hidden">
+            <div class="glass w-full max-w-lg p-5 sm:p-6 rounded-3xl animate-slide-up flex flex-col max-h-[85vh]">
+              <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                <div class="flex items-center gap-2">
+                  <i class="ph ph-clock-counter-clockwise text-primary text-2xl"></i>
+                  <h3 class="text-base sm:text-lg font-bold">Riwayat Terjemahan</h3>
+                </div>
+                <button onclick="app.closeHistoryModal()" class="text-textgray hover:text-primary p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
+                  <i class="ph ph-x text-2xl"></i>
+                </button>
+              </div>
+
+              <!-- List Riwayat -->
+              <div id="transHistoryList" class="flex-1 overflow-y-auto space-y-3 pr-1 py-2">
+                <!-- Diisi oleh JS -->
+              </div>
+
+              <div class="flex gap-3 mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 flex-shrink-0">
+                <button onclick="app.clearHistory()" class="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-500 font-semibold py-3 rounded-xl transition text-xs sm:text-sm min-h-[44px]">
+                  Hapus Semua
+                </button>
+                <button
+                  onclick="app.closeHistoryModal()"
+                  class="flex-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold py-3 rounded-xl transition text-xs sm:text-sm min-h-[44px]"
+                >
+                  Tutup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: QUIZ VIEW (Kuis Interaktif) -->
+          <div id="view-quiz" class="section-view">
+            <!-- Pengenalan Kuis & Pengaturan Panjang Kuis -->
+            <div id="quizIntro" class="text-center max-w-lg mx-auto py-4 sm:py-6">
+              <div class="w-20 h-20 sm:w-28 sm:h-28 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                <i class="ph-fill ph-trophy text-4xl sm:text-5xl text-primary animate-bounce"></i>
+              </div>
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Uji Kemampuanmu!</h2>
+              <p class="text-xs sm:text-sm text-textgray mb-6">Selesaikan soal tantangan kosakata pilihan untuk mendapatkan bonus XP instan.</p>
+
+              <!-- Pilihan Jumlah Soal (Fleksibilitas Kuis) -->
+              <div class="glass p-4 rounded-2xl mb-6 max-w-xs mx-auto text-left">
+                <label class="block text-[10px] sm:text-xs font-bold text-textgray mb-2 flex items-center gap-1"> <i class="ph ph-list-numbers text-sm"></i> PILIH PANJANG KUIS: </label>
+                <div class="grid grid-cols-3 gap-1.5">
+                  <button onclick="app.setQuizLength(5)" id="btnQL-5" class="ql-btn py-2 px-1 text-center rounded-lg text-xs font-bold bg-primary text-white transition-all">5 Soal</button>
+                  <button onclick="app.setQuizLength(10)" id="btnQL-10" class="ql-btn py-2 px-1 text-center rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-textgray transition-all">
+                    10 Soal
+                  </button>
+                  <button onclick="app.setQuizLength(15)" id="btnQL-15" class="ql-btn py-2 px-1 text-center rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-textgray transition-all">
+                    15 Soal
+                  </button>
+                  <button
+                    onclick="app.setQuizLength(20)"
+                    id="btnQL-20"
+                    class="ql-btn py-2 px-1 text-center rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-textgray transition-all col-span-1"
+                  >
+                    20 Soal
+                  </button>
+                  <button
+                    onclick="app.setQuizLength('maraton')"
+                    id="btnQL-maraton"
+                    class="ql-btn py-2 px-1 text-center rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-textgray transition-all col-span-2"
+                  >
+                    Maraton (Semua)
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onclick="app.startQuiz()"
+                class="w-full max-w-xs bg-primary text-white px-6 py-3.5 rounded-xl font-bold shadow-lg hover:shadow-primary/40 transform hover:-translate-y-1 transition text-xs sm:text-sm md:text-base min-h-[48px]"
+              >
+                Mulai Kuis Sekarang
+              </button>
+            </div>
+
+            <!-- Tampilan Kuis Aktif -->
+            <div id="quizActive" class="hide max-w-2xl mx-auto">
+              <div class="glass p-4 sm:p-5 rounded-3xl mb-6 flex justify-between items-center">
+                <div class="text-sm sm:text-base md:text-lg font-bold">Soal <span id="quizCurrentQ">1</span>/<span id="quizTotalQ">5</span></div>
+                <div class="flex gap-2 text-primary font-bold text-xs sm:text-sm md:text-base items-center"><i class="ph-fill ph-clock text-lg"></i> <span id="quizTimer">00:30</span></div>
+              </div>
+
+              <div class="glass p-5 sm:p-8 rounded-3xl text-center mb-6">
+                <p class="text-[10px] sm:text-xs md:text-sm text-textgray mb-2" id="quizContext">Terjemahkan kalimat berikut:</p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-gradient leading-relaxed" id="quizQuestion">Abdi</h2>
+
+                <!-- Layout responsive grid untuk pilihan kuis -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" id="quizOptions">
+                  <!-- Pilihan opsi jawaban diisi oleh JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tampilan Hasil Kuis -->
+            <div id="quizResult" class="hide text-center max-w-lg mx-auto py-6 animate-slide-up">
+              <div class="w-20 h-20 sm:w-28 sm:h-28 bg-green-100 dark:bg-green-900/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                <i class="ph-fill ph-star text-4xl sm:text-5xl text-green-500"></i>
+              </div>
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Kuis Selesai!</h2>
+              <p class="text-base sm:text-lg mb-6">Skor Anda: <span id="quizScoreVal" class="font-bold text-primary">100</span>/100</p>
+              <div class="glass p-4 rounded-2xl mb-6 flex justify-center gap-6 sm:gap-8 max-w-xs mx-auto">
+                <div>
+                  <p class="text-[10px] sm:text-xs text-textgray">XP Didapat</p>
+                  <p class="text-lg sm:text-xl font-bold text-amber-500">+<span id="quizXpEarned">50</span></p>
+                </div>
+                <div>
+                  <p class="text-[10px] sm:text-xs text-textgray">Akurasi</p>
+                  <p class="text-lg sm:text-xl font-bold text-green-500"><span id="quizAccuracyVal">100</span>%</p>
+                </div>
+              </div>
+              <button
+                onclick="app.switchTab('dashboard')"
+                class="bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-white px-5 py-3 rounded-xl font-bold hover:bg-slate-300 transition text-xs sm:text-sm min-h-[44px]"
+              >
+                Kembali ke Dashboard
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 5: AI ASSISTANT (Integrasi Gemini) -->
+          <div id="view-ai" class="section-view h-full">
+            <div class="glass rounded-3xl h-[68vh] sm:h-[75vh] md:h-[78vh] flex flex-col overflow-hidden max-w-4xl mx-auto">
+              <div class="p-3 sm:p-4 border-b border-white/10 bg-primary/5 flex items-center gap-3">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center text-white flex-shrink-0">
+                  <i class="ph-fill ph-robot text-lg sm:text-xl"></i>
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-xs sm:text-sm md:text-base truncate">Kang AI / Taretan AI</h3>
+                  <p class="text-[10px] sm:text-xs text-green-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Online</p>
+                </div>
+              </div>
+
+              <!-- Area Percakapan -->
+              <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-4 text-xs sm:text-sm" id="chatArea">
+                <!-- Sambutan Bot Awal -->
+                <div class="flex gap-2 sm:gap-3 max-w-[85%]">
+                  <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="ph-fill ph-robot"></i></div>
+                  <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3 shadow-sm leading-relaxed">
+                    Halo! Saya AI asisten pembelajaranmu yang ditenagai oleh Google Gemini. Kamu bisa tanyakan apa saja seputar kosa kata Sunda, Madura, tatabahasa, atau minta contoh kalimat
+                    percakapan. Mau belajar apa hari ini?
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input Kirim Chat -->
+              <div class="p-2.5 sm:p-3 border-t border-white/10 bg-white/30 dark:bg-black/30 flex gap-2">
+                <input
+                  type="text"
+                  id="aiInput"
+                  placeholder="Tanyakan sesuatu..."
+                  class="flex-1 bg-white dark:bg-slate-800 border-none rounded-xl px-3 py-2.5 sm:py-3 outline-none focus:ring-1 focus:ring-primary text-base md:text-sm"
+                  onkeypress="if (event.key === 'Enter') app.sendChat();"
+                />
+                <button
+                  id="aiSendBtn"
+                  onclick="app.sendChat()"
+                  class="bg-primary text-white w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center hover:bg-primary-dark transition-colors flex-shrink-0 min-w-[40px]"
+                >
+                  <i class="ph-fill ph-paper-plane-right text-lg sm:text-xl"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 6: LEADERBOARD VIEW (Papan Peringkat) -->
+          <div id="view-leaderboard" class="section-view">
+            <div class="max-w-3xl mx-auto">
+              <div class="text-center mb-6 sm:mb-8">
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-1.5">Papan Peringkat</h2>
+                <p class="text-xs sm:text-sm text-textgray">Bersaing dengan pembelajar lain dan raih posisi teratas!</p>
+              </div>
+
+              <!-- Podium 3 Besar -->
+              <div class="flex items-end justify-center gap-1.5 xs:gap-2 sm:gap-6 mb-6 sm:mb-8 h-36 xs:h-40 sm:h-48" id="leaderboardPodium">
+                <!-- Diisi secara dinamis -->
+              </div>
+
+              <!-- Daftar Sisa Peringkat -->
+              <div class="glass rounded-3xl p-2 sm:p-4 md:p-6" id="leaderboardList">
+                <div class="text-center text-textgray py-8 text-xs sm:text-sm">Memproses papan peringkat global...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 7: SETTINGS VIEW (Pengaturan) -->
+          <div id="view-settings" class="section-view">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-6">Pengaturan</h2>
+            <div class="max-w-2xl glass p-4 sm:p-6 md:p-8 rounded-3xl space-y-6">
+              <div>
+                <label class="block text-xs sm:text-sm font-semibold mb-2 text-textgray">Nama Profil</label>
+                <div class="flex gap-2">
+                  <input
+                    type="text"
+                    id="settingName"
+                    class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 sm:py-3 outline-none focus:ring-1 focus:ring-primary text-base md:text-sm dark:text-white"
+                  />
+                  <button onclick="app.updateName()" class="bg-primary hover:bg-primary-dark text-white px-4 rounded-xl transition text-xs sm:text-sm font-semibold min-h-[42px]">Simpan</button>
+                </div>
+              </div>
+
+              <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                <label class="block text-xs sm:text-sm font-semibold mb-2 text-textgray">Google Apps Script Web App URL (Integrasi Backend)</label>
+                <p class="text-[10px] sm:text-xs text-textgray mb-3 leading-relaxed">
+                  Paste URL Web App dari GAS Anda untuk mengaktifkan Cloud Save dan Global Leaderboard. Jika kosong, aplikasi akan menggunakan Local Storage.
+                </p>
+                <div class="flex gap-2 flex-col sm:flex-row">
+                  <input
+                    type="url"
+                    id="settingGasUrl"
+                    placeholder="https://script.google.com/macros/s/..."
+                    class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 sm:py-3 outline-none focus:ring-1 focus:ring-primary text-xs sm:text-sm dark:text-white"
+                  />
+                  <button
+                    onclick="app.saveGasUrl()"
+                    class="bg-slate-800 dark:bg-slate-200 text-white dark:text-black px-4 py-2.5 sm:py-3 rounded-xl hover:opacity-80 transition text-xs sm:text-sm font-semibold whitespace-nowrap min-h-[42px]"
+                  >
+                    Hubungkan
+                  </button>
+                </div>
+              </div>
+
+              <div class="border-t border-slate-200 dark:border-slate-700 pt-6 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+                <button onclick="app.logout()" class="text-red-500 font-semibold text-xs sm:text-sm hover:underline flex items-center gap-1.5 p-1">
+                  <i class="ph ph-sign-out"></i> Keluar / Ganti Akun
+                </button>
+                <button onclick="app.resetData()" class="text-red-500/70 font-semibold text-xs sm:text-sm hover:underline flex items-center gap-1.5 p-1">
+                  <i class="ph ph-trash"></i> Hapus Semua Data Lokal
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Pemberitahuan Toast -->
+    <div id="toast" class="toast glass px-5 py-2.5 rounded-full flex items-center gap-2.5 shadow-xl max-w-[90vw]">
+      <i class="ph-fill ph-check-circle text-green-500 text-lg sm:text-xl" id="toastIcon"></i>
+      <span id="toastMsg" class="font-medium text-xs sm:text-sm">Notifikasi</span>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT APLIKASI -->
+    <script>
+      const apiKey = ""; // Disuntikkan secara otomatis pada runtime oleh environment
+
+      const app = {
+        state: {
+          user: {
+            id: "",
+            name: "",
+            xp: 0,
+            level: 1,
+            streak: 0,
+            lastLogin: null,
+          },
+          gasUrl: "https://script.google.com/macros/s/AKfycbwlKMmUcj7vD9JnF0rX4z_XjsXRqw8rx4mbJo87cgkQiMImukrt6yidQG8WjTswAP9bKw/exec",
+          currentTab: "dashboard",
+          darkMode: false,
+          quizIndex: 0,
+          quizScore: 0,
+          quizTimer: null,
+          quizLimit: 5,
+          translationHistory: [],
+          currentQuizQuestions: [],
+          activeQuestion: null,
+          activeOptions: [],
+          sourceLang: "su",
+          targetLang: "mad",
+          selectedCategoryFilter: "all",
+        },
+
+        // Database Kosakata Lokal Komprehensif
+        db: {
+          dictionary: {
+            // Kamus Translator Cepat (Sunda -> Madura)
+            abdi: "bule",
+            kuring: "sengko'",
+            alus: "baghus",
+            awon: "jhubak",
+            abot: "berra'",
+            anom: "ngodha",
+            alit: "kene'",
+            anjeun: "ba'na",
+            aya: "bedhe",
+            ayeuna: "sateya",
+            arurang: "sengko' kabbhi",
+            akang: "kaka'",
+            "api-api": "ca-kaca",
+            anggeus: "mare",
+            acan: "gi' ta'",
+            angkat: "mangkat",
+            bapa: "eppa'",
+            biwir: "bibir",
+            beureum: "mera",
+            bodas: "pote",
+            bumi: "roma",
+            imah: "roma",
+            badag: "raje",
+            gede: "raje",
+            buuk: "obu'",
+            bade: "entara",
+            berang: "seyang",
+            bengit: "mellem",
+            bingung: "bingong",
+            bener: "bhender",
+            bisa: "bisa",
+            bawa: "ghiba",
+            cai: "aeng",
+            calik: "toju'",
+            diuk: "toju'",
+            cangkem: "colo'",
+            ceuli: "kupeng",
+            ceurik: "nanges",
+            cicing: "enneng",
+            carios: "caca",
+            caket: "semma'",
+            cageur: "waras",
+            dinten: "are",
+            poe: "are",
+            dua: "duwa'",
+            daging: "daging",
+            dahar: "ngakan",
+            tuang: "nedda",
+            datang: "dhateng",
+            dongkap: "dhateng",
+            didieu: "edhinna'",
+            ditu: "edhissa'",
+            dugi: "dapa'",
+            enjing: "lagghu",
+            isuk: "lagghu",
+            eueut: "ngenom",
+            nginum: "ngenom",
+            engke: "agghi'",
+            embung: "ta' terro",
+            eleh: "kala",
+            geulis: "raddin",
+            gancang: "duli",
+            galumbira: "senneng",
+            gampil: "gampang",
+            gering: "sake'",
+            gampang: "gampang",
+            gedang: "kates",
+            hideung: "celleng",
+            henteu: "enja'",
+            teu: "enja'",
+            huntu: "ghighi",
+            hulu: "cethak",
+            sirah: "cethak",
+            hareup: "ade'",
+            hejo: "bhiru daun",
+            hese: "malarat",
+            hiji: "settong",
+            hutang: "otang",
+            hujan: "ojan",
+            hayang: "terro",
+            indung: "emma'",
+            indit: "entar",
+            mios: "entar",
+            irung: "elong",
+            iraha: "bila",
+            ieu: "areya",
+            itu: "arowa",
+            ibak: "mandhi",
+            mandi: "mandhi",
+            jangkung: "tengghi",
+            jauh: "jau",
+            tebih: "jau",
+            jero: "dhalem",
+            jeung: "bi'",
+            sareng: "bi'",
+            jalan: "lorong",
+            jalma: "oreng",
+            kumaha: "baramma",
+            kunaon: "arapa",
+            koneng: "koneng",
+            kasep: "gantheng",
+            kamari: "bhereng",
+            katuhu: "kanan",
+            kenca: "kacer",
+            keur: "agghi'",
+            kaluar: "kalowar",
+            korsi: "korsi",
+            leungeun: "tanang",
+            leutik: "kene'",
+            loba: "bannya'",
+            lemes: "alos",
+            leumpang: "ajalan",
+            lami: "abid",
+            lila: "abid",
+            leungit: "elang",
+            luhur: "attas",
+            mata: "mata",
+            soca: "mata",
+            mahal: "larang",
+            murah: "modha",
+            mangkat: "mangkat",
+            minggu: "ahad",
+            maca: "maca",
+            meuli: "melle",
+            meser: "melle",
+            nyokot: "ngala'",
+            nyandak: "ngala'",
+            nuhun: "sakalangkong",
+            ngaran: "nyama",
+            jenengan: "nyama",
+            naon: "apa",
+            naha: "arapa",
+            ngan: "pera'",
+            nyaho: "tao",
+            terang: "tao",
+            nyarios: "acaca",
+            oray: "olar",
+            omong: "caca",
+            panjang: "lanjang",
+            pondok: "pandha'",
+            panonpoe: "are",
+            poek: "petteng",
+            pasar: "pasar",
+            pisan: "onggu",
+            punten: "seporana",
+            pameget: "lake'",
+            istri: "bine'",
+            awewe: "bine'",
+            ramo: "rema",
+            rupa: "ropa",
+            sare: "teydong",
+            kulem: "teydong",
+            suku: "soko",
+            sabaraha: "barampa",
+            saha: "sapa",
+            sae: "baghus",
+            sanes: "benni",
+            seueur: "bannya'",
+            tilu: "tello'",
+            opat: "empa'",
+            lima: "lema'",
+            genep: "ennem",
+            tujuh: "petto'",
+            dalapan: "bellu'",
+            salapan: "sanga'",
+            sapuluh: "sapolo",
+            tanya: "tanya",
+            teuaya: "tada'",
+            ucing: "koceng",
+            ulin: "amaen",
+            wengi: "malem",
+          },
+          categories: [
+            { id: "c1", title: "Salam & Sapaan", icon: "ph-hand-waving", color: "bg-blue-500", total: 10 },
+            { id: "c2", title: "Kata Ganti Orang", icon: "ph-users", color: "bg-purple-500", total: 10 },
+            { id: "c3", title: "Aktivitas Harian", icon: "ph-person-simple-run", color: "bg-green-500", total: 12 },
+            { id: "c4", title: "Angka Utama", icon: "ph-list-numbers", color: "bg-amber-500", total: 11 },
+            { id: "c5", title: "Makanan & Minuman", icon: "ph-coffee", color: "bg-orange-500", total: 10 },
+            { id: "c6", title: "Kata Sifat Populer", icon: "ph-magic-wand", color: "bg-pink-500", total: 14 },
+            { id: "c7", title: "Hubungan Keluarga", icon: "ph-baby", color: "bg-red-500", total: 10 },
+            { id: "c8", title: "Bagian Tubuh", icon: "ph-hand", color: "bg-teal-500", total: 10 },
+            { id: "c9", title: "Kata Tanya Penting", icon: "ph-question", color: "bg-indigo-500", total: 10 },
+            { id: "c10", title: "Hari & Waktu", icon: "ph-calendar", color: "bg-cyan-500", total: 10 },
+            { id: "c11", title: "Aneka Warna", icon: "ph-palette", color: "bg-rose-500", total: 8 },
+            { id: "c12", title: "Lokasi & Arah", icon: "ph-compass", color: "bg-lime-500", total: 8 },
+          ],
+          lessons: [
+            // C1: Salam & Sapaan (10 Items)
+            { cat: "c1", s: "Kumaha damang?", m: "Baramma kabarra?", ex: "Menanyakan kabar (Bagaimana kabar?)" },
+            { cat: "c1", s: "Wilujeng enjing", m: "Salamet lagghu", ex: "Sapaan pagi hari (Selamat pagi)" },
+            { cat: "c1", s: "Wilujeng beurang / siang", m: "Salamet seyang", ex: "Sapaan siang hari (Selamat siang)" },
+            { cat: "c1", s: "Wilujeng sonten", m: "Salamet asar", ex: "Sapaan sore hari (Selamat sore)" },
+            { cat: "c1", s: "Wilujeng wengi", m: "Salamet malem", ex: "Sapaan malam (Selamat malam)" },
+            { cat: "c1", s: "Hatur nuhun", m: "Mator sakalangkong", ex: "Ucapan terima kasih" },
+            { cat: "c1", s: "Hapunten / Punten", m: "Nyo'on seporah", ex: "Meminta maaf atau permisi ketika lewat" },
+            { cat: "c1", s: "Sae, pangestu", m: "Baghus, alhamdulillah", ex: "Jawaban atas pertanyaan kabar (Baik, berkat rahmat-Nya)" },
+            { cat: "c1", s: "Mangga / Muhun", m: "Iye / Keng", ex: "Kata persetujuan atau mempersilakan (Silakan / Iya)" },
+            { cat: "c1", s: "Wilujeng sumping", m: "Salamet dhateng", ex: "Menyambut kedatangan seseorang (Selamat datang)" },
+
+            // C2: Kata Ganti Orang (10 Items)
+            { cat: "c2", s: "Abdi / Kuring", m: "Bule / Sengko'", ex: "Abdi tiasa (Bule bisa) - Sengko' bentuk informal" },
+            { cat: "c2", s: "Anjeun / Maneh", m: "Dika / Ba'na", ex: "Anjeun bade kamana? (Ba'na entara kaamma?)" },
+            { cat: "c2", s: "Mantenna / Manehna", m: "Aba'na", ex: "Menyebut orang ketiga tunggal (Beliau / Dia)" },
+            { cat: "c2", s: "Arurang / Urang sarerea", m: "Sengko' kabbhi", ex: "Kata ganti orang pertama jamak (Kita sekalian)" },
+            { cat: "c2", s: "Pameget / Lalaki", m: "Lake'", ex: "Merujuk pada laki-laki" },
+            { cat: "c2", s: "Istri / Awewe", m: "Bine'", ex: "Merujuk pada perempuan" },
+            { cat: "c2", s: "Jalma / Urang", m: "Oreng", ex: "Merujuk pada manusia secara umum (Orang)" },
+            { cat: "c2", s: "Mamang / Paman", m: "Bhabha' / Paman", ex: "Sapaan paman atau kerabat pria paruh baya" },
+            { cat: "c2", s: "Bibi / Tante", m: "Bhibhi'", ex: "Sapaan bibi atau kerabat wanita" },
+            { cat: "c2", s: "Anjeun sadaya", m: "Dika kabbhi", ex: "Kata ganti orang kedua jamak (Kalian semua)" },
+
+            // C3: Aktivitas Harian (12 Items)
+            { cat: "c3", s: "Kulem / Sare", m: "Teydong", ex: "Abdi bade kulem (Bule terro teydonga)" },
+            { cat: "c3", s: "Ibak / Mandi", m: "Mandhi", ex: "Geus mandi acan? (La mandhi apa gi' ta'?)" },
+            { cat: "c3", s: "Mios / Indit", m: "Entar / Mangkat", ex: "Bade mios ka sekolah (Entara ka sakola'an)" },
+            { cat: "c3", s: "Maca", m: "Maca", ex: "Maca buku di imah (Maca buku e roma)" },
+            { cat: "c3", s: "Gawé / Damel", m: "Alako", ex: "Mangkat gawé (Mangkat alako)" },
+            { cat: "c3", s: "Meuli / Meser", m: "Melle", ex: "Meser ka warung (Melle ka bherung)" },
+            { cat: "c3", s: "Nyandak / Nyokot", m: "Ngala'", ex: "Tolong nyandak cai (Tolong ngala' aeng)" },
+            { cat: "c3", s: "Cicing / Matuh", m: "Enneng", ex: "Cicing di dieu (Enneng edhinna')" },
+            { cat: "c3", s: "Nyarios / Ngomong", m: "Acaca", ex: "Sangkan teu nyarios deui (Makar ta' acaca pole)" },
+            { cat: "c3", s: "Ulin / Ameng", m: "Amaen", ex: "Barudak keur ulin (Na'-kana' gi' amaen)" },
+            { cat: "c3", s: "Leumpang", m: "Ajalan", ex: "Leumpang mapay jalan (Ajalan nyalorongi lorong)" },
+            { cat: "c3", s: "Balik / Mulih", m: "Mole", ex: "Abdi bade mulih ayeuna (Bule terro moleya sateya)" },
+
+            // C4: Angka Utama (11 Items)
+            { cat: "c4", s: "Hiji", m: "Settong", ex: "Hiji buku (Settong buku)" },
+            { cat: "c4", s: "Dua", m: "Duwa'", ex: "Dua jalma (Duwa' oreng)" },
+            { cat: "c4", s: "Tilu", m: "Tello'", ex: "Tilu dinten (Tello' are)" },
+            { cat: "c4", s: "Opat", m: "Empa'", ex: "Opat macem (Empa' macem)" },
+            { cat: "c4", s: "Lima", m: "Lema'", ex: "Lima ramo (Lema' rema)" },
+            { cat: "c4", s: "Genep", m: "Ennem", ex: "Genep siki (Ennem bigghi')" },
+            { cat: "c4", s: "Tujuh", m: "Petto'", ex: "Tujuh rupa (Petto' ropa)" },
+            { cat: "c4", s: "Dalapan", m: "Bellu'", ex: "Dalapan poe (Bellu' are)" },
+            { cat: "c4", s: "Salapan", m: "Sanga'", ex: "Salapan jalma (Sanga' oreng)" },
+            { cat: "c4", s: "Sapuluh", m: "Sapolo", ex: "Sapuluh rebu (Sapolo ebu)" },
+            { cat: "c4", s: "Saratus", m: "Satos", ex: "Saratus dinten (Satos are)" },
+
+            // C5: Makanan & Minuman (10 Items)
+            { cat: "c5", s: "Tuang / Dahar", m: "Nedda / Ngakan", ex: "Hayu urang tuang (Ngereng nedda)" },
+            { cat: "c5", s: "Eueut / Nginum", m: "Ngenom", ex: "Nginum cai herang (Ngenom aeng pote)" },
+            { cat: "c5", s: "Cai", m: "Aeng", ex: "Air segar untuk konsumsi (Aeng pote)" },
+            { cat: "c5", s: "Sangu / Kéjo", m: "Nasek", ex: "Nasi hangat (Nasek celleng / anget)" },
+            { cat: "c5", s: "Daging", m: "Daging", ex: "Daging munding (Daging sapi)" },
+            { cat: "c5", s: "Gedang", m: "Kates", ex: "Buah pepaya manis" },
+            { cat: "c5", s: "Lauk", m: "Jhuko'", ex: "Lauk pauk pendamping nasi (Terutama ikan)" },
+            { cat: "c5", s: "Uyah", m: "Ghireng", ex: "Bumbu dapur asin (Garam)" },
+            { cat: "c5", s: "Gula", m: "Gula", ex: "Pemanis rasa" },
+            { cat: "c5", s: "Haneut", m: "Anget", ex: "Air hangat suam-suam kuku (Aeng anget)" },
+
+            // C6: Kata Sifat Populer (14 Items)
+            { cat: "c6", s: "Sae / Alus", m: "Baghus", ex: "Sae pisan euy (Baghus onggu)" },
+            { cat: "c6", s: "Awon / Goreng", m: "Jhubak", ex: "Kelakuan nu awon (Kalakowan jhubak)" },
+            { cat: "c6", s: "Geulis", m: "Raddin", ex: "Pujian kecantikan wanita (Cantik)" },
+            { cat: "c6", s: "Kasep", m: "Gantheng", ex: "Pujian ketampanan pria (Tampan)" },
+            { cat: "c6", s: "Badag / Gede", m: "Raje", ex: "Imahna badag (Romana raje)" },
+            { cat: "c6", s: "Alit / Leutik", m: "Kene'", ex: "Anakna masih alit (Pottana gi' kene')" },
+            { cat: "c6", s: "Jangkung / Luhur", m: "Tengghi", ex: "Siswa jangkung (Siswa tengghi)" },
+            { cat: "c6", s: "Panjang", m: "Lanjang", ex: "Tali panjang (Tale lanjang)" },
+            { cat: "c6", s: "Pondok / Heureut", m: "Pandha'", ex: "Waktu pondok (Bakto pandha')" },
+            { cat: "c6", s: "Gampang / Babari", m: "Gampang", ex: "Ujian gampang (Ojian gampang)" },
+            { cat: "c6", s: "Hese / Sesah", m: "Malarat", ex: "Pangarti hese (Pangartian malarat)" },
+            { cat: "c6", s: "Loba / Seueur", m: "Bannya'", ex: "Loba duit (Bannya' pesse)" },
+            { cat: "c6", s: "Amis", m: "Manis", ex: "Rasa buah manis (Rasa buwa manis)" },
+            { cat: "c6", s: "Asin", m: "Asen", ex: "Rasa asin berlebih (Rasa asen)" },
+
+            // C7: Hubungan Keluarga (10 Items)
+            { cat: "c7", s: "Bapa / Rama", m: "Eppa'", ex: "Bapa angkat damel (Eppa' mangkat alako)" },
+            { cat: "c7", s: "Indung / Ibu", m: "Emma'", ex: "Indung keur masak (Emma' aghebey kakan)" },
+            { cat: "c7", s: "Lanceuk", m: "Kaka' / Taretan seppo", ex: "Lanceuk lalaki (Kaka' lake')" },
+            { cat: "c7", s: "Adi", m: "Ale' / Taretan anom", ex: "Adi keur ulin (Ale' gi' amaen)" },
+            { cat: "c7", s: "Aki", m: "Kae", ex: "Kakek tersayang" },
+            { cat: "c7", s: "Nini", m: "Nyae", ex: "Nenek tersayang" },
+            { cat: "c7", s: "Incu", m: "Kompol", ex: "Cucu keluarga" },
+            { cat: "c7", s: "Mitoha", m: "Matowa", ex: "Orang tua dari pasangan hidup (Mertua)" },
+            { cat: "c7", s: "Alo", m: "Kaponakan", ex: "Anak dari kakak atau adik (Keponakan)" },
+            { cat: "c7", s: "Sobat / Babaturan", m: "Kanca", ex: "Teman dekat seperjuangan (Kanca semma')" },
+
+            // C8: Bagian Tubuh (10 Items)
+            { cat: "c8", s: "Hulu / Sirah", m: "Cethak", ex: "Nyeri sirah (Sake' cethak)" },
+            { cat: "c8", s: "Panon / Soca", m: "Mata", ex: "Soca beureum (Mata mera)" },
+            { cat: "c8", s: "Irung", m: "Elong", ex: "Alat pernapasan (Hidung)" },
+            { cat: "c8", s: "Biwir", m: "Bibir", ex: "Bibir manis" },
+            { cat: "c8", s: "Leungeun", m: "Tanang", ex: "Abersi tanang (Mencuci tangan)" },
+            { cat: "c8", s: "Suku / Sampean", m: "Soko", ex: "Suku loka (Kaki terluka)" },
+            { cat: "c8", s: "Huntu / Waos", m: "Ghighi", ex: "Gigi sehat putih" },
+            { cat: "c8", s: "Ceuli / Cepil", m: "Kupeng", ex: "Telinga untuk mendengar" },
+            { cat: "c8", s: "Buuk / Buuk", m: "Obu'", ex: "Rambut hitam berkilau (Obu' celleng)" },
+            { cat: "c8", s: "Beuheung", m: "Le'er", ex: "Bagian leher" },
+
+            // C9: Kata Tanya Penting (10 Items)
+            { cat: "c9", s: "Naon", m: "Apa", ex: "Aya naon? (Bedhe apa?)" },
+            { cat: "c9", s: "Saha", m: "Sapa", ex: "Saha eta? (Sapa arowa?)" },
+            { cat: "c9", s: "Iraha", m: "Bila", ex: "Iraha indit? (Bila entara?)" },
+            { cat: "c9", s: "Dimana", m: "E kamma", ex: "Dimana bumina? (E kamma romana?)" },
+            { cat: "c9", s: "Kamana", m: "Ka kamma", ex: "Bade kamana? (Entara ka kamma?)" },
+            { cat: "c9", s: "Kumaha", m: "Baramma", ex: "Kumaha carana? (Baramma carana?)" },
+            { cat: "c9", s: "Kunaon / Naha", m: "Arapa", ex: "Kunaon ceurik? (Arapa ma' nanges?)" },
+            { cat: "c9", s: "Sabaraha", m: "Barampa", ex: "Sabaraha hargana? (Barampa arghana?)" },
+            { cat: "c9", s: "Nu mana", m: "Se kamma", ex: "Nu mana bajuna? (Se kamma kelambina?)" },
+            { cat: "c9", s: "Naha henteu", m: "Arapa ma' ta'", ex: "Alasan menolak (Mengapa tidak)" },
+
+            // C10: Hari & Waktu (10 Items)
+            { cat: "c10", s: "Ayeuna", m: "Sateya", ex: "Ayeuna pisan (Sateya onggu)" },
+            { cat: "c10", s: "Dinten / Poe", m: "Are", ex: "Poe ieu (Are areya)" },
+            { cat: "c10", s: "Enjing / Isuk", m: "Lagghu", ex: "Isuk-isuk (Lagghu-lagghu)" },
+            { cat: "c10", s: "Kamari", m: "Bhereng", ex: "Kemarin lusa" },
+            { cat: "c10", s: "Wengi / Peuting", m: "Malem", ex: "Tengah wengi (Tengnga malem)" },
+            { cat: "c10", s: "Beurang", m: "Seyang", ex: "Siang hari terik matahari" },
+            { cat: "c10", s: "Engke", m: "Agghi'", ex: "Engke peuting (Agghi' malem)" },
+            { cat: "c10", s: "Isuk / Enjing", m: "Lagghu", ex: "Besok pagi hari" },
+            { cat: "c10", s: "Poe Minggu", m: "Are Ahad", ex: "Hari libur akhir pekan" },
+            { cat: "c10", s: "Tengah poe", m: "Tengnga are", ex: "Tepat jam dua belas siang" },
+
+            // C11: Aneka Warna (8 Items)
+            { cat: "c11", s: "Beureum", m: "Mera", ex: "Baju beureum (Kalambi mera)" },
+            { cat: "c11", s: "Bodas", m: "Pote", ex: "Kertas bodas (Kertas pote)" },
+            { cat: "c11", s: "Hideung", m: "Celleng", ex: "Hideung cakeutreuk (Celleng onggu)" },
+            { cat: "c11", s: "Koneng", m: "Koneng", ex: "Kuning kunyit" },
+            { cat: "c11", s: "Hejo", m: "Bhiru daun", ex: "Daun hejo royo-royo" },
+            { cat: "c11", s: "Bulao / Biru", m: "Bhiru", ex: "Langit biru cerah" },
+            { cat: "c11", s: "Katumbiri", m: "Pelange", ex: "Pelangi indah di angkasa" },
+            { cat: "c11", s: "Coklat", m: "Coklat", ex: "Warna tanah kayu" },
+
+            // C12: Lokasi & Arah (8 Items)
+            { cat: "c12", s: "Hareup", m: "Ade'", ex: "Di hareup (E ade')" },
+            { cat: "c12", s: "Tukang", m: "Budi", ex: "Di tukang (E budi)" },
+            { cat: "c12", s: "Luhur", m: "Attas", ex: "Di luhur (E attas)" },
+            { cat: "c12", s: "Handap", m: "Beba", ex: "Di handap (E beba)" },
+            { cat: "c12", s: "Jero", m: "Dhalem", ex: "Asup ka jero (Masok ka dhalem)" },
+            { cat: "c12", s: "Luar", m: "Lowar", ex: "Di luar imah (E lowar roma)" },
+            { cat: "c12", s: "Kenca", m: "Kacer", ex: "Belok kenca (Ngelok kacer)" },
+            { cat: "c12", s: "Katuhu", m: "Kanan", ex: "Belok katuhu (Ngelok kanan)" },
+          ],
+          // Bank Soal Kuis untuk Evaluasi komprehensif
+          quizDatabase: [
+            { q: "Apa bahasa Madura dari kata 'Abdi / Kuring'?", a: ["Bule / Sengko'", "Ba'na", "Emma'", "Eppa'"], c: "Bule / Sengko'", ctx: "Terjemahkan kata berikut:" },
+            { q: "Apa bahasa Madura dari kata 'Anjeun'?", a: ["Dika / Ba'na", "Sengko'", "Raddin", "Baghus"], c: "Dika / Ba'na", ctx: "Terjemahkan kata berikut:" },
+            {
+              q: "Bagaimana cara mengucapkan 'Terima kasih' dalam bahasa Madura?",
+              a: ["Mator sakalangkong", "Nyo'on seporah", "Baramma kabarra?", "Salamet lagghu"],
+              c: "Mator sakalangkong",
+              ctx: "Pilih terjemahan yang tepat:",
+            },
+            {
+              q: "Apa arti dari 'Kumaha damang?' dalam bahasa Madura?",
+              a: ["Baramma kabarra?", "Mator sakalangkong", "Entara ka kamma?", "Nyo'on seporah"],
+              c: "Baramma kabarra?",
+              ctx: "Pilih kecocokan artinya:",
+            },
+            { q: "Apa bahasa Madura dari kata 'Imah / Bumi'?", a: ["Roma", "Soko", "Aeng", "Lorong"], c: "Roma", ctx: "Terjemahkan kosakata benda:" },
+            { q: "Apa arti dari bahasa Madura 'Raddin'?", a: ["Geulis (Cantik)", "Kasep (Tampan)", "Alus (Baik)", "Goreng (Buruk)"], c: "Geulis (Cantik)", ctx: "Tebak arti kata berikut:" },
+            { q: "Apa bahasa Madura dari kata 'Cai'?", a: ["Aeng", "Nasek", "Daging", "Kates"], c: "Aeng", ctx: "Terjemahkan kosakata benda:" },
+            {
+              q: "Berhitunglah dalam bahasa Madura: 'Settong, Duwa', Tello'' artinya?",
+              a: ["Hiji, Dua, Tilu", "Opat, Lima, Genep", "Tujuh, Dalapan, Salapan", "Hiji, Tilu, Lima"],
+              c: "Hiji, Dua, Tilu",
+              ctx: "Pilih kecocokan angka:",
+            },
+            { q: "Apa arti dari 'Sae' (Sunda) ke bahasa Madura?", a: ["Baghus", "Jhubak", "Raddin", "Gantheng"], c: "Baghus", ctx: "Pilih kata sifat yang tepat:" },
+            { q: "Apa bahasa Madura dari 'Mandi'?", a: ["Mandhi", "Teydong", "Entar", "Alako"], c: "Mandhi", ctx: "Terjemahkan kata kerja:" },
+            { q: "Apa bahasa Sunda dari kata Madura 'Eppa''?", a: ["Bapa", "Indung", "Lanceuk", "Adi"], c: "Bapa", ctx: "Terjemahkan kembali ke bahasa Sunda:" },
+            { q: "Apa bahasa Madura dari kata 'Kasep'?", a: ["Gantheng", "Raddin", "Baghus", "Jhubak"], c: "Gantheng", ctx: "Pilih padanan kata sifat:" },
+            { q: "Apa arti kata bahasa Madura 'Teydong'?", a: ["Sare / Kulem (Tidur)", "Ibak / Mandi", "Dahar / Tuang", "Ulin"], c: "Sare / Kulem (Tidur)", ctx: "Tebak arti aktivitas berikut:" },
+            { q: "Apa bahasa Madura dari kata tanya 'Saha'?", a: ["Sapa", "Apa", "Bila", "Arapa"], c: "Sapa", ctx: "Terjemahkan kata tanya berikut:" },
+            { q: "Apa bahasa Madura dari 'Poe ieu' (Hari ini)?", a: ["Are sateya", "Lagghu", "Bhereng", "Malem"], c: "Are sateya", ctx: "Pilih padanan keterangan waktu:" },
+            { q: "Apa bahasa Sunda dari kata Madura 'Emma''?", a: ["Indung", "Bapa", "Nini", "Aki"], c: "Indung", ctx: "Terjemahkan kembali ke bahasa Sunda:" },
+            { q: "Apa bahasa Madura dari warna 'Hideung' (Hitam)?", a: ["Celleng", "Mera", "Pote", "Bhiru"], c: "Celleng", ctx: "Terjemahkan warna berikut:" },
+            { q: "Apa arti dari kata bahasa Madura 'Ngakan'?", a: ["Dahar / Tuang (Makan)", "Nginum / Eueut", "Sare", "Mandi"], c: "Dahar / Tuang (Makan)", ctx: "Tebak arti aktivitas berikut:" },
+            { q: "Apa bahasa Madura dari kata tanya 'Dimana'?", a: ["E kamma", "Ka kamma", "Sapa", "Barampa"], c: "E kamma", ctx: "Terjemahkan kata tanya lokasi:" },
+            { q: "Apa bahasa Madura dari kata 'Leutik'?", a: ["Kene'", "Raje", "Tengghi", "Lanjang"], c: "Kene'", ctx: "Pilih padanan kata sifat:" },
+            { q: "Apa bahasa Madura dari kata 'Incu'?", a: ["Kompol", "Matowa", "Ale'", "Matowa"], c: "Kompol", ctx: "Terjemahkan kata kekeluargaan berikut:" },
+            { q: "Apa bahasa Madura dari arah 'Kenca'?", a: ["Kacer", "Kanan", "Lowar", "Attas"], c: "Kacer", ctx: "Terjemahkan arah berikut:" },
+            {
+              q: "Bagaimana mengucapkan 'Selamat Pagi' dalam bahasa Madura?",
+              a: ["Salamet lagghu", "Salamet seyang", "Salamet malem", "Salamet dhateng"],
+              c: "Salamet lagghu",
+              ctx: "Pilih sapaan waktu yang tepat:",
+            },
+            { q: "Apa bahasa Madura dari warna 'Hejo'?", a: ["Bhiru daun", "Celleng", "Mera", "Pote"], c: "Bhiru daun", ctx: "Terjemahkan nama warna berikut:" },
+            { q: "Apa bahasa Sunda dari kata Madura 'Mato'o' / 'Matowa'?", a: ["Mitoha", "Alo", "Lanceuk", "Kae"], c: "Mitoha", ctx: "Terjemahkan kembali ke Sunda:" },
+          ],
+          simulatedCompetitors: [
+            { Name: "Asep Perkasa", XP: 1450, Level: 10, UserID: "sim_1" },
+            { Name: "Ceu Odah", XP: 980, Level: 7, UserID: "sim_2" },
+            { Name: "Joko Madura", XP: 850, Level: 6, UserID: "sim_3" },
+            { Name: "Siti Rahma", XP: 620, Level: 5, UserID: "sim_4" },
+            { Name: "Budi Santoso", XP: 410, Level: 3, UserID: "sim_5" },
+            { Name: "Neng Lilis", XP: 250, Level: 2, UserID: "sim_6" },
+            { Name: "Taretan Halim", XP: 120, Level: 1, UserID: "sim_7" },
+          ],
+        },
+
+        init() {
+          this.loadLocalData();
+          this.checkTheme();
+
+          if (this.state.user.name) {
+            this.renderDashboard();
+            document.getElementById("onboardingScreen").classList.add("hide");
+            document.getElementById("mainApp").classList.remove("hide");
+            this.updateStreak();
+          }
+
+          this.renderCategories();
+        },
+
+        loadLocalData() {
+          const savedUser = localStorage.getItem("sm_user");
+          const savedUrl = localStorage.getItem("sm_gas_url");
+          const savedTheme = localStorage.getItem("sm_theme");
+          const savedHistory = localStorage.getItem("sm_trans_history");
+
+          if (savedUser) this.state.user = JSON.parse(savedUser);
+          if (savedUrl) this.state.gasUrl = savedUrl;
+          if (savedTheme) this.state.darkMode = savedTheme === "dark";
+          if (savedHistory) this.state.translationHistory = JSON.parse(savedHistory);
+
+          if (!this.state.user.id) {
+            this.state.user.id = "USR_" + Math.random().toString(36).substr(2, 9);
+          }
+        },
+
+        saveLocalData() {
+          localStorage.setItem("sm_user", JSON.stringify(this.state.user));
+          localStorage.setItem("sm_trans_history", JSON.stringify(this.state.translationHistory));
+
+          if (this.state.user && this.state.user.name) {
+            const localProfiles = JSON.parse(localStorage.getItem("sm_local_profiles") || "[]");
+            const updated = localProfiles.filter((u) => u.name.toLowerCase().trim() !== this.state.user.name.toLowerCase().trim());
+            updated.push(this.state.user);
+            localStorage.setItem("sm_local_profiles", JSON.stringify(updated));
+          }
+
+          this.renderTopStats();
+        },
+
+        checkTheme() {
+          if (this.state.darkMode || (!("sm_theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+            this.state.darkMode = true;
+          } else {
+            document.documentElement.classList.remove("dark");
+            this.state.darkMode = false;
+          }
+        },
+
+        toggleTheme() {
+          this.state.darkMode = !this.state.darkMode;
+          localStorage.setItem("sm_theme", this.state.darkMode ? "dark" : "light");
+          this.checkTheme();
+        },
+
+        toggleSidebar() {
+          const sidebar = document.getElementById("sidebar");
+          const overlay = document.getElementById("sidebarOverlay");
+          sidebar.classList.toggle("-translate-x-full");
+          overlay.classList.toggle("hidden");
+        },
+
+        switchTab(tabId) {
+          this.state.currentTab = tabId;
+
+          document.querySelectorAll(".nav-btn").forEach((btn) => {
+            btn.classList.remove("active", "bg-primary/10", "text-primary");
+            btn.classList.add("text-textgray");
+          });
+          const activeBtn = document.querySelector(`[onclick="app.switchTab('${tabId}')"]`);
+          if (activeBtn) {
+            activeBtn.classList.add("active", "bg-primary/10", "text-primary");
+            activeBtn.classList.remove("text-textgray");
+          }
+
+          document.querySelectorAll(".section-view").forEach((view) => {
+            view.classList.remove("active");
+          });
+          document.getElementById(`view-${tabId}`).classList.add("active");
+
+          const titleMap = {
+            dashboard: "Dashboard",
+            learn: "Materi Belajar",
+            translator: "Translator",
+            quiz: "Kuis Interaktif",
+            ai: "AI Assistant",
+            leaderboard: "Global Leaderboard",
+            settings: "Pengaturan",
+          };
+          document.getElementById("topBarTitle").innerText = titleMap[tabId] || "Sunda to Madura";
+
+          if (window.innerWidth < 768 && !document.getElementById("sidebar").classList.contains("-translate-x-full")) {
+            this.toggleSidebar();
+          }
+
+          if (tabId === "settings") {
+            document.getElementById("settingName").value = this.state.user.name;
+            document.getElementById("settingGasUrl").value = this.state.gasUrl;
+          }
+          if (tabId === "leaderboard") {
+            this.fetchLeaderboard();
+          }
+          if (tabId === "learn") {
+            this.renderCategories();
+          }
+        },
+
+        showToast(msg, isError = false) {
+          const toast = document.getElementById("toast");
+          const icon = document.getElementById("toastIcon");
+
+          document.getElementById("toastMsg").innerText = msg;
+          if (isError) {
+            icon.className = "ph-fill ph-x-circle text-red-500 text-xl";
+          } else {
+            icon.className = "ph-fill ph-check-circle text-green-500 text-xl";
+          }
+
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 3000);
+        },
+
+        async startLearning() {
+          const name = document.getElementById("userNameInput").value.trim();
+          if (!name) return this.showToast("Silakan masukkan nama Anda", true);
+
+          const btn = document.querySelector("#onboardingScreen button");
+          const originalText = btn.innerHTML;
+          btn.innerHTML = `<i class="ph ph-spinner animate-spin"></i> Memeriksa profil...`;
+          btn.disabled = true;
+
+          try {
+            let userLoaded = null;
+
+            const localProfiles = JSON.parse(localStorage.getItem("sm_local_profiles") || "[]");
+            const existingLocal = localProfiles.find((u) => u.name.toLowerCase().trim() === name.toLowerCase().trim());
+            if (existingLocal) {
+              userLoaded = existingLocal;
+            }
+
+            if (this.state.gasUrl) {
+              try {
+                const res = await fetch(`${this.state.gasUrl}?action=getUser&name=${encodeURIComponent(name)}`);
+                const result = await res.json();
+                if (result.success && result.data) {
+                  userLoaded = {
+                    id: result.data.userId,
+                    name: result.data.name,
+                    xp: parseInt(result.data.xp) || 0,
+                    level: parseInt(result.data.level) || 1,
+                    streak: parseInt(result.data.streak) || 1,
+                    lastLogin: new Date().toDateString(),
+                  };
+                }
+              } catch (e) {
+                console.warn("Gagal terhubung ke GAS, menggunakan data lokal.", e);
+              }
+            }
+
+            if (userLoaded) {
+              this.state.user = userLoaded;
+              this.showToast(`Selamat datang kembali, ${this.state.user.name}!`);
+            } else {
+              this.state.user = {
+                id: "USR_" + Math.random().toString(36).substr(2, 9),
+                name: name,
+                xp: 0,
+                level: 1,
+                streak: 1,
+                lastLogin: new Date().toDateString(),
+              };
+              this.showToast(`Akun pembelajaran baru dibuat untuk ${name}!`);
+            }
+
+            const updatedProfiles = localProfiles.filter((u) => u.name.toLowerCase().trim() !== name.toLowerCase().trim());
+            updatedProfiles.push(this.state.user);
+            localStorage.setItem("sm_local_profiles", JSON.stringify(updatedProfiles));
+
+            this.saveLocalData();
+            this.renderDashboard();
+
+            document.getElementById("onboardingScreen").classList.add("opacity-0");
+            setTimeout(() => {
+              document.getElementById("onboardingScreen").classList.add("hide");
+              document.getElementById("mainApp").classList.remove("hide");
+            }, 500);
+          } catch (err) {
+            this.showToast("Gagal memproses pendaftaran masuk.", true);
+          } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        },
+
+        updateStreak() {
+          const today = new Date().toDateString();
+          if (this.state.user.lastLogin !== today) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (this.state.user.lastLogin === yesterday.toDateString()) {
+              this.state.user.streak++;
+            } else {
+              this.state.user.streak = 1;
+            }
+            this.state.user.lastLogin = today;
+            this.saveLocalData();
+          }
+        },
+
+        renderDashboard() {
+          const u = this.state.user;
+          document.getElementById("dashName").innerText = u.name;
+          document.getElementById("sidebarName").innerText = u.name;
+          document.getElementById("sidebarAvatar").innerText = u.name.charAt(0).toUpperCase();
+
+          u.level = Math.floor(u.xp / 150) + 1;
+          let levelName = u.level < 3 ? "Pemula" : u.level < 6 ? "Menengah" : "Mahir";
+          let nextXp = u.level * 150;
+          let progress = ((u.xp % 150) / 150) * 100;
+
+          document.getElementById("sidebarLevel").innerText = u.level;
+          document.getElementById("currentLevelDisplay").innerText = `${levelName} (Lv ${u.level})`;
+          document.getElementById("currentXpDisplay").innerText = u.xp;
+          document.getElementById("xpToNext").innerText = `Butuh ${nextXp - u.xp} XP ke Level ${u.level + 1}`;
+          document.getElementById("levelProgressBar").style.width = `${progress}%`;
+
+          document.getElementById("statStreak").innerText = u.streak;
+
+          this.renderTopStats();
+          this.syncToGas();
+        },
+
+        renderTopStats() {
+          document.getElementById("streakCount").innerText = `${this.state.user.streak} Hari`;
+          document.getElementById("xpCount").innerText = `${this.state.user.xp} XP`;
+        },
+
+        addXP(amount, reason) {
+          this.state.user.xp += amount;
+          this.saveLocalData();
+          this.renderDashboard();
+          this.showToast(`+${amount} XP (${reason})`);
+        },
+
+        logout() {
+          if (confirm("Apakah Anda yakin ingin keluar? Progress belajar Anda tetap tersimpan dalam lokal.")) {
+            localStorage.removeItem("sm_user");
+            localStorage.removeItem("sm_trans_history");
+            this.state.user = {
+              id: "",
+              name: "",
+              xp: 0,
+              level: 1,
+              streak: 0,
+              lastLogin: null,
+            };
+            this.state.translationHistory = [];
+            location.reload();
+          }
+        },
+
+        // ================= KATEGORI DAN MATERI BELAJAR =================
+        renderCategories() {
+          const grid = document.getElementById("categoryGrid");
+          let catsToRender = [...this.db.categories];
+
+          grid.innerHTML = catsToRender
+            .map(
+              (c) => `
+                    <div onclick="app.openLesson('${c.id}')" class="glass p-5 rounded-2xl cursor-pointer hover:border-primary/50 hover:-translate-y-1 transition-all group flex flex-col justify-between h-40 relative overflow-hidden min-h-[140px]">
+                        <div class="absolute -right-4 -bottom-4 w-24 h-24 ${c.color} opacity-10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 rounded-xl ${c.color}/10 flex items-center justify-center mb-4">
+                            <i class="ph-fill ${c.icon} text-2xl" style="color: var(--tw-colors-${c.color.replace("bg-", "").split("-")[0]}-500)"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base md:text-lg leading-tight mb-1 truncate">${c.title}</h3>
+                            <p class="text-xs text-textgray">${c.total} Kosakata bawaan</p>
+                        </div>
+                    </div>
+                `,
+            )
+            .join("");
+        },
+
+        openLesson(id) {
+          const cat = this.db.categories.find((c) => c.id === id);
+          document.getElementById("lessonTitle").innerText = cat.title;
+
+          const filteredLessons = this.db.lessons.filter((l) => l.cat === id);
+          const list = document.getElementById("lessonItemsList");
+
+          if (filteredLessons.length > 0) {
+            list.innerHTML = filteredLessons
+              .map(
+                (l) => `
+                        <div class="glass p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-slide-up">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                                    <h4 class="text-lg md:text-xl font-bold text-primary">${l.s}</h4>
+                                    <i class="ph ph-arrow-right text-textgray text-sm"></i>
+                                    <h4 class="text-lg md:text-xl font-bold text-amber-500">${l.m}</h4>
+                                </div>
+                                <p class="text-xs md:text-sm text-textgray italic leading-relaxed">Contoh: ${l.ex}</p>
+                            </div>
+                            <div class="flex gap-2 w-full sm:w-auto flex-shrink-0">
+                                <button onclick="app.speak('${l.s}', 'id-ID')" class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all p-3" title="Dengar Pelafalan">
+                                    <i class="ph-fill ph-speaker-high text-lg"></i>
+                                </button>
+                                <button onclick="app.addXP(5, 'Mempelajari Kosakata')" class="flex-1 sm:flex-initial px-4 py-2.5 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-xl text-xs font-bold transition-all min-h-[48px]">
+                                    Pelajari (+5 XP)
+                                </button>
+                            </div>
+                        </div>
+                    `,
+              )
+              .join("");
+          } else {
+            list.innerHTML = `<div class="text-center py-10 text-textgray text-sm">Materi kategori ini sedang diproses. Silakan kembali lagi nanti!</div>`;
+          }
+
+          document.getElementById("view-learn").classList.remove("active");
+          document.getElementById("view-lesson-detail").classList.add("active");
+        },
+
+        // ================= PENUKAR ARAH BAHASA (SWAP) =================
+        swapLanguages() {
+          const btn = document.getElementById("btnSwapLang");
+          btn.classList.toggle("rotate-180");
+
+          const temp = this.state.sourceLang;
+          this.state.sourceLang = this.state.targetLang;
+          this.state.targetLang = temp;
+
+          const labelInput = document.getElementById("labelInputLang");
+          const labelOutput = document.getElementById("labelOutputLang");
+
+          if (this.state.sourceLang === "su") {
+            labelInput.innerText = "Sunda";
+            labelInput.className = "font-semibold text-primary transition-all duration-300";
+            labelOutput.innerText = "Madura";
+            labelOutput.className = "font-semibold text-amber-500 transition-all duration-300";
+          } else {
+            labelInput.innerText = "Madura";
+            labelInput.className = "font-semibold text-amber-500 transition-all duration-300";
+            labelOutput.innerText = "Sunda";
+            labelOutput.className = "font-semibold text-primary transition-all duration-300";
+          }
+
+          const inputVal = document.getElementById("transInput").value;
+          const outputVal = document.getElementById("transOutput").value;
+
+          document.getElementById("transInput").value = outputVal;
+          document.getElementById("transOutput").value = inputVal;
+
+          this.showToast(`Bahasa ditukar: ${labelInput.innerText} ⇆ ${labelOutput.innerText}`);
+        },
+
+        // ================= FITUR TRANSLATOR INTELEKTUAL =================
+        async translate() {
+          const input = document.getElementById("transInput").value.trim();
+          if (!input) {
+            this.showToast("Masukkan teks terlebih dahulu!", true);
+            return;
+          }
+
+          const outputField = document.getElementById("transOutput");
+          outputField.value = "Menerjemahkan...";
+
+          const sl = this.state.sourceLang;
+          const tl = this.state.targetLang;
+
+          try {
+            const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(input)}`);
+            if (!response.ok) throw new Error("API Google Terjemah Offline");
+
+            const data = await response.json();
+            let translatedText = "";
+
+            if (data && data[0]) {
+              translatedText = data[0].map((item) => item[0]).join("");
+            }
+
+            if (translatedText) {
+              translatedText = translatedText.charAt(0).toUpperCase() + translatedText.slice(1);
+              outputField.value = translatedText;
+            } else {
+              throw new Error("Format respons rusak");
+            }
+          } catch (error) {
+            console.warn("Gagal terjemah via Google, menggunakan asisten AI / Kamus lokal...", error);
+            try {
+              const fallbackPrompt = `Terjemahkan teks bahasa ${sl === "su" ? "Sunda" : "Madura"} berikut ke bahasa ${tl === "mad" ? "Madura" : "Sunda"} dengan alami dan sopan:\n\n"${input}"`;
+              const aiTranslation = await this.callGemini(fallbackPrompt);
+              if (aiTranslation) {
+                outputField.value = aiTranslation.trim();
+              } else {
+                throw new Error("Asisten AI gagal menerjemahkan");
+              }
+            } catch (geminiError) {
+              if (sl === "su") {
+                this.localTranslateFallback(input);
+              } else {
+                outputField.value = "Koneksi terputus. Kamus luring saat ini hanya mendukung terjemahan Sunda ke Madura.";
+              }
+            }
+          }
+
+          const newHistory = {
+            id: "HIST_" + Date.now(),
+            sunda: sl === "su" ? input : outputField.value,
+            madura: sl === "su" ? outputField.value : input,
+            time: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+          };
+
+          this.state.translationHistory.unshift(newHistory);
+          if (this.state.translationHistory.length > 25) {
+            this.state.translationHistory.pop();
+          }
+          this.saveLocalData();
+
+          this.addXP(2, "Menerjemahkan");
+          this.showToast("Terjemahan sukses!");
+        },
+
+        localTranslateFallback(input) {
+          let output = input.toLowerCase();
+
+          const phraseDictionary = {
+            "kumaha damang": "baramma kabarra",
+            "wilujeng enjing": "salamet lagghu",
+            "wilujeng wengi": "salamet malem",
+            "hatur nuhun": "mator sakalangkong",
+            "hatur nuhun pisan": "mator sakalangkong onggu",
+            "hapunten pisan": "nyo'on seporah onggu",
+            "bade kamana": "entara ka kamma",
+            "dinten ayeuna": "are sateya",
+            "di luar imah": "e lowar roma",
+            "nyeri sirah": "sake' cethak",
+            "baju beureum": "kalambi mera",
+            "sabaraha hargana": "barampa arghana",
+            "gawe bareng": "alako areng-sareng",
+            "mangkat gawe": "mangkat alako",
+            "di jero": "e dhalem",
+            "di luar": "e lowar",
+            "di luhur": "e attas",
+            "di handap": "e beba",
+          };
+
+          for (const [sundaPhrase, maduraPhrase] of Object.entries(phraseDictionary)) {
+            const regex = new RegExp(`\\b${sundaPhrase}\\b`, "gi");
+            output = output.replace(regex, maduraPhrase);
+          }
+
+          let words = output.split(/\s+/);
+          let outputWords = words.map((w) => {
+            let cleanWord = w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "");
+            let trans = this.db.dictionary[cleanWord];
+            if (trans) {
+              return w.replace(cleanWord, trans);
+            }
+            return w;
+          });
+
+          output = outputWords.join(" ");
+          if (output.length > 0) {
+            output = output.charAt(0).toUpperCase() + output.slice(1);
+          }
+          document.getElementById("transOutput").value = output;
+        },
+
+        // ================= TEXT TO SPEECH (SUARA) =================
+        speak(text, lang = "id-ID") {
+          if (!text) {
+            this.showToast("Tidak ada teks suara!", true);
+            return;
+          }
+
+          if (!("speechSynthesis" in window)) {
+            this.showToast("Browser tidak mendukung Text-to-Speech", true);
+            return;
+          }
+
+          window.speechSynthesis.cancel();
+
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang;
+          utterance.pitch = 1.0;
+          utterance.rate = 0.85;
+
+          const voices = window.speechSynthesis.getVoices();
+          const localVoice = voices.find((v) => v.lang.startsWith("id") || v.lang.startsWith("in"));
+          if (localVoice) {
+            utterance.voice = localVoice;
+          }
+
+          window.speechSynthesis.speak(utterance);
+        },
+
+        // ================= MODAL RIWAYAT TERJEMAHAN =================
+        openHistoryModal() {
+          const modal = document.getElementById("transHistoryModal");
+          const list = document.getElementById("transHistoryList");
+
+          modal.classList.remove("hidden");
+
+          if (this.state.translationHistory.length === 0) {
+            list.innerHTML = `
+                        <div class="text-center py-8 text-textgray">
+                            <i class="ph ph-folder-open text-4xl mb-2"></i>
+                            <p class="text-sm">Belum ada riwayat terjemahan.</p>
+                        </div>
+                    `;
+            return;
+          }
+
+          list.innerHTML = this.state.translationHistory
+            .map(
+              (item) => `
+                    <div class="glass p-4 rounded-2xl border border-white/10 flex flex-col gap-2 hover:border-primary/40 transition relative group">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs text-textgray flex items-center gap-1">
+                                <i class="ph ph-clock"></i> ${item.time}
+                            </span>
+                            <div class="flex gap-2">
+                                <button onclick="app.reuseHistory('${item.id}')" class="text-textgray hover:text-primary transition p-1" title="Gunakan kembali">
+                                    <i class="ph ph-arrow-u-up-left text-lg"></i>
+                                </button>
+                                <button onclick="app.deleteHistoryItem('${item.id}')" class="text-textgray hover:text-red-500 transition p-1" title="Hapus">
+                                    <i class="ph ph-trash text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-sm">
+                            <p class="text-xs text-primary font-semibold mb-0.5">Sunda</p>
+                            <p class="font-medium mb-2">${item.sunda}</p>
+                            <p class="text-xs text-amber-500 font-semibold mb-0.5">Madura</p>
+                            <p class="font-semibold text-slate-800 dark:text-slate-100">${item.madura}</p>
+                        </div>
+                    </div>
+                `,
+            )
+            .join("");
+        },
+
+        closeHistoryModal() {
+          document.getElementById("transHistoryModal").classList.add("hidden");
+        },
+
+        deleteHistoryItem(id) {
+          this.state.translationHistory = this.state.translationHistory.filter((item) => item.id !== id);
+          this.saveLocalData();
+          this.openHistoryModal();
+          this.showToast("Item riwayat terhapus");
+        },
+
+        clearHistory() {
+          if (confirm("Hapus semua riwayat terjemahan Anda?")) {
+            this.state.translationHistory = [];
+            this.saveLocalData();
+            this.openHistoryModal();
+            this.showToast("Seluruh riwayat dibersihkan");
+          }
+        },
+
+        reuseHistory(id) {
+          const item = this.state.translationHistory.find((i) => i.id === id);
+          if (item) {
+            if (this.state.sourceLang === "su") {
+              document.getElementById("transInput").value = item.sunda;
+              document.getElementById("transOutput").value = item.madura;
+            } else {
+              document.getElementById("transInput").value = item.madura;
+              document.getElementById("transOutput").value = item.sunda;
+            }
+            this.closeHistoryModal();
+            this.showToast("Riwayat dimuat");
+          }
+        },
+
+        copyToClipboard(elementId) {
+          const el = document.getElementById(elementId);
+          el.select();
+          document.execCommand("copy");
+          this.showToast("Salin ke clipboard berhasil!");
+        },
+
+        // ================= KUIS EVALUASI INTERAKTIF =================
+        setQuizLength(len) {
+          document.querySelectorAll(".ql-btn").forEach((btn) => {
+            btn.classList.remove("bg-primary", "text-white");
+            btn.classList.add("bg-slate-100", "dark:bg-slate-800", "text-textgray");
+          });
+
+          const activeBtn = document.getElementById(`btnQL-${len}`);
+          if (activeBtn) {
+            activeBtn.classList.add("bg-primary", "text-white");
+            activeBtn.classList.remove("bg-slate-100", "dark:bg-slate-800", "text-textgray");
+          }
+
+          this.state.quizLimit = len;
+        },
+
+        startQuiz() {
+          document.getElementById("quizIntro").classList.add("hide");
+          document.getElementById("quizResult").classList.add("hide");
+          document.getElementById("quizActive").classList.remove("hide");
+
+          this.state.quizScore = 0;
+          this.state.quizIndex = 0;
+
+          let finalLimit = 5;
+          if (this.state.quizLimit === "maraton") {
+            finalLimit = this.db.quizDatabase.length;
+          } else {
+            finalLimit = parseInt(this.state.quizLimit) || 5;
+          }
+
+          document.getElementById("quizTotalQ").innerText = finalLimit;
+
+          const shuffled = [...this.db.quizDatabase].sort(() => 0.5 - Math.random());
+          this.state.currentQuizQuestions = shuffled.slice(0, finalLimit);
+
+          this.loadQuizQuestion();
+
+          let timeLeft = 30;
+          document.getElementById("quizTimer").innerText = `00:30`;
+          clearInterval(this.state.quizTimer);
+          this.state.quizTimer = setInterval(() => {
+            timeLeft--;
+            document.getElementById("quizTimer").innerText = `00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`;
+            if (timeLeft <= 0) {
+              clearInterval(this.state.quizTimer);
+              this.endQuiz();
+            }
+          }, 1000);
+        },
+
+        loadQuizQuestion() {
+          document.getElementById("quizCurrentQ").innerText = this.state.quizIndex + 1;
+          const currentQuestion = this.state.currentQuizQuestions[this.state.quizIndex];
+
+          this.state.activeQuestion = currentQuestion;
+
+          document.getElementById("quizContext").innerText = currentQuestion.ctx;
+          document.getElementById("quizQuestion").innerText = currentQuestion.q;
+
+          let options = [...currentQuestion.a];
+          options.sort(() => Math.random() - 0.5);
+          this.state.activeOptions = options;
+
+          const optContainer = document.getElementById("quizOptions");
+          optContainer.innerHTML = options
+            .map(
+              (opt, idx) => `
+                    <button onclick="app.answerQuiz(${idx})" class="glass p-4 rounded-2xl text-sm md:text-base font-semibold hover:bg-primary/10 hover:border-primary transition text-center animate-slide-up min-h-[50px] flex items-center justify-center">
+                        ${opt}
+                    </button>
+                `,
+            )
+            .join("");
+        },
+
+        answerQuiz(selectedIndex) {
+          const selected = this.state.activeOptions[selectedIndex];
+          const correct = this.state.activeQuestion.c;
+
+          const maxQ = this.state.currentQuizQuestions.length;
+          const pointsPerQuestion = 100 / maxQ;
+
+          if (selected === correct) {
+            this.state.quizScore += pointsPerQuestion;
+            this.showToast("Benar!", false);
+          } else {
+            this.showToast(`Kurang tepat! Jawaban benar: ${correct}`, true);
+          }
+
+          this.state.quizIndex++;
+          if (this.state.quizIndex < maxQ) {
+            setTimeout(() => this.loadQuizQuestion(), 800);
+          } else {
+            setTimeout(() => this.endQuiz(), 800);
+          }
+        },
+
+        endQuiz() {
+          clearInterval(this.state.quizTimer);
+          document.getElementById("quizActive").classList.add("hide");
+          document.getElementById("quizResult").classList.remove("hide");
+
+          const finalScore = Math.round(this.state.quizScore);
+          document.getElementById("quizScoreVal").innerText = finalScore;
+          document.getElementById("quizAccuracyVal").innerText = finalScore;
+
+          let xpGained = Math.round(finalScore / 2);
+          document.getElementById("quizXpEarned").innerText = xpGained;
+
+          if (xpGained > 0) {
+            this.addXP(xpGained, "Kuis Selesai");
+          }
+        },
+
+        // ================= ASISTEN PEMBELAJARAN AI (GEMINI API) =================
+        async callGemini(userMessage) {
+          const systemPrompt =
+            "Anda adalah asisten pembelajaran bahasa daerah Sunda dan Madura bernama 'Kang AI / Taretan AI' yang cerdas, ramah, dan profesional. Bantu pengguna belajar menerjemahkan, memahami tata bahasa, dan kosakata Sunda ke Madura atau sebaliknya secara akurat. Usahakan memberikan contoh kalimat yang menarik dan mudah dipahami.";
+
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+          const payload = {
+            contents: [{ parts: [{ text: userMessage }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+          };
+
+          let delay = 1000;
+          for (let i = 0; i < 5; i++) {
+            try {
+              const response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              });
+
+              if (!response.ok) throw new Error(`HTTP Error Status: ${response.status}`);
+
+              const result = await response.json();
+              const replyText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (replyText) return replyText;
+            } catch (error) {
+              if (i === 4) throw error;
+              await new Promise((resolve) => setTimeout(resolve, delay));
+              delay *= 2;
+            }
+          }
+          throw new Error("Gagal memperoleh respons dari server asisten AI.");
+        },
+
+        async sendChat() {
+          const input = document.getElementById("aiInput");
+          const sendBtn = document.getElementById("aiSendBtn");
+          const text = input.value.trim();
+          if (!text) return;
+
+          const chatArea = document.getElementById("chatArea");
+
+          chatArea.innerHTML += `
+                    <div class="flex gap-3 max-w-[85%] ml-auto justify-end mb-4 animate-slide-up">
+                        <div class="bg-primary text-white rounded-2xl rounded-tr-none p-3 shadow-md">
+                            ${text}
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center text-primary text-xs font-bold">${this.state.user.name.charAt(0).toUpperCase()}</div>
+                    </div>
+                `;
+
+          input.value = "";
+          input.disabled = true;
+          sendBtn.disabled = true;
+
+          const typingId = "typing_" + Date.now();
+          chatArea.innerHTML += `
+                    <div id="${typingId}" class="flex gap-3 max-w-[85%] mb-4 animate-slide-up">
+                        <div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="ph-fill ph-robot"></i></div>
+                        <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3 shadow-md flex items-center gap-1.5 text-textgray">
+                            <span class="animate-bounce" style="animation-delay: 0s">●</span>
+                            <span class="animate-bounce" style="animation-delay: 0.15s">●</span>
+                            <span class="animate-bounce" style="animation-delay: 0.3s">●</span>
+                        </div>
+                    </div>
+                `;
+          chatArea.scrollTop = chatArea.scrollHeight;
+
+          try {
+            const responseText = await this.callGemini(text);
+            document.getElementById(typingId).remove();
+
+            const formattedResponse = responseText.replace(/\n/g, "<br>");
+            chatArea.innerHTML += `
+                        <div class="flex gap-3 max-w-[85%] mb-4 animate-slide-up">
+                            <div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="ph-fill ph-robot"></i></div>
+                            <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3 shadow-md">
+                                ${formattedResponse}
+                            </div>
+                        </div>
+                    `;
+
+            this.addXP(1, "Berdiskusi dengan AI");
+          } catch (error) {
+            document.getElementById(typingId).remove();
+            chatArea.innerHTML += `
+                        <div class="flex gap-3 max-w-[85%] mb-4 animate-slide-up">
+                            <div class="w-8 h-8 rounded-full bg-red-500 flex-shrink-0 flex items-center justify-center text-white text-xs"><i class="ph ph-warning"></i></div>
+                            <div class="bg-red-500/10 text-red-500 border border-red-500/20 rounded-2xl rounded-tl-none p-3 shadow-md">
+                                Gagal mendapatkan respon. Silakan periksa jaringan internet Anda dan coba kembali.
+                            </div>
+                        </div>
+                    `;
+          } finally {
+            input.disabled = false;
+            sendBtn.disabled = false;
+            input.focus();
+            chatArea.scrollTop = chatArea.scrollHeight;
+          }
+        },
+
+        // ================= GLOBAL / SIMULATOR LEADERBOARD =================
+        renderLeaderboardUI(players) {
+          players.sort((a, b) => b.XP - a.XP);
+
+          const podiumContainer = document.getElementById("leaderboardPodium");
+
+          const p1 = players[0] || { Name: "-", XP: 0, Level: 1 };
+          const p2 = players[1] || { Name: "-", XP: 0, Level: 1 };
+          const p3 = players[2] || { Name: "-", XP: 0, Level: 1 };
+
+          const p1Badge = p1.UserID === this.state.user.id ? ' <span class="text-[10px] text-yellow-500">(Anda)</span>' : "";
+          const p2Badge = p2.UserID === this.state.user.id ? ' <span class="text-[10px] text-slate-500">(Anda)</span>' : "";
+          const p3Badge = p3.UserID === this.state.user.id ? ' <span class="text-[10px] text-orange-500">(Anda)</span>' : "";
+
+          podiumContainer.innerHTML = `
+                    <!-- Posisi #2 -->
+                    <div class="flex flex-col items-center w-[28%] max-w-[100px] animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 rounded-full bg-slate-200 dark:bg-slate-800 border border-slate-400 flex items-center justify-center font-bold text-slate-600 text-xs xs:text-sm mb-1 sm:mb-2">#2</div>
+                        <div class="font-bold truncate w-full text-center text-[10px] xs:text-xs mb-0.5 sm:mb-1">${p2.Name}${p2Badge}</div>
+                        <div class="text-[9px] xs:text-[10px] sm:text-xs text-primary font-semibold mb-1.5">${p2.XP} XP</div>
+                        <div class="w-full h-14 xs:h-16 sm:h-24 bg-gradient-to-t from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-t-lg border-t-2 sm:border-t-4 border-slate-400"></div>
+                    </div>
+                    <!-- Posisi #1 -->
+                    <div class="flex flex-col items-center w-[34%] max-w-[120px] animate-slide-up z-10">
+                        <div class="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 rounded-full bg-yellow-50 dark:bg-yellow-950/20 border-2 sm:border-4 border-yellow-400 flex items-center justify-center font-bold text-yellow-600 text-sm mb-1 sm:mb-2 relative">
+                            <i class="ph-fill ph-crown absolute -top-4 text-lg xs:text-xl text-yellow-500 animate-bounce"></i>
+                            #1
+                        </div>
+                        <div class="font-bold truncate w-full text-center text-[11px] xs:text-xs mb-0.5 sm:mb-1">${p1.Name}${p1Badge}</div>
+                        <div class="text-[9px] xs:text-[10px] sm:text-xs text-primary font-semibold mb-1.5">${p1.XP} XP</div>
+                        <div class="w-full h-20 xs:h-24 sm:h-32 bg-gradient-to-t from-yellow-200/50 to-yellow-100/50 dark:from-yellow-900/30 dark:to-yellow-800/30 rounded-t-lg border-t-2 sm:border-t-4 border-yellow-400"></div>
+                    </div>
+                    <!-- Posisi #3 -->
+                    <div class="flex flex-col items-center w-[28%] max-w-[100px] animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 dark:bg-orange-950/20 border border-orange-400 flex items-center justify-center font-bold text-orange-600 text-xs xs:text-sm mb-1 sm:mb-2">#3</div>
+                        <div class="font-bold truncate w-full text-center text-[10px] xs:text-xs mb-0.5 sm:mb-1">${p3.Name}${p3Badge}</div>
+                        <div class="text-[9px] xs:text-[10px] sm:text-xs text-primary font-semibold mb-1.5">${p3.XP} XP</div>
+                        <div class="w-full h-10 xs:h-12 sm:h-20 bg-gradient-to-t from-orange-200/30 to-orange-100/30 dark:from-orange-900/30 dark:to-orange-800/30 rounded-t-lg border-t-2 sm:border-t-4 border-orange-400"></div>
+                    </div>
+                `;
+
+          const listContainer = document.getElementById("leaderboardList");
+          if (players.length > 3) {
+            listContainer.innerHTML = players
+              .slice(3)
+              .map(
+                (u, i) => `
+                        <div class="flex items-center gap-3 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors border-b border-slate-100 dark:border-slate-800 last:border-0 text-xs sm:text-sm">
+                            <div class="w-6 font-bold text-textgray text-center">${i + 4}</div>
+                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary flex-shrink-0">${u.Name.charAt(0).toUpperCase()}</div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-bold truncate text-xs sm:text-sm">${u.Name} ${u.UserID === this.state.user.id ? '<span class="text-[9px] bg-primary text-white px-1.5 py-0.5 rounded-full ml-1">Anda</span>' : ""}</h4>
+                                <p class="text-[9px] sm:text-[10px] text-textgray">Level ${u.Level || 1}</p>
+                            </div>
+                            <div class="font-bold text-primary flex-shrink-0 text-xs sm:text-sm">${u.XP} <span class="text-[10px] font-normal text-textgray">XP</span></div>
+                        </div>
+                    `,
+              )
+              .join("");
+          } else {
+            listContainer.innerHTML = `<div class="text-center py-4 text-textgray text-xs">Tidak ada sisa kompetitor di peringkat ini.</div>`;
+          }
+        },
+
+        async fetchLeaderboard() {
+          const list = document.getElementById("leaderboardList");
+
+          if (!this.state.gasUrl) {
+            const userEntry = {
+              Name: this.state.user.name,
+              XP: this.state.user.xp,
+              Level: this.state.user.level,
+              UserID: this.state.user.id,
+            };
+
+            const otherPlayers = this.db.simulatedCompetitors.filter((p) => p.UserID !== this.state.user.id);
+            const localLeaderboard = [userEntry, ...otherPlayers];
+
+            this.renderLeaderboardUI(localLeaderboard);
+            return;
+          }
+
+          list.innerHTML = '<div class="text-center py-8 text-primary animate-pulse text-sm">Memuat data global...</div>';
+
+          try {
+            const res = await fetch(`${this.state.gasUrl}?action=getLeaderboard`);
+            const data = await res.json();
+
+            if (data.success && data.data.length > 0) {
+              const mappedPlayers = data.data.map((p) => ({
+                Name: p.Name || "Pelajar",
+                XP: parseInt(p.XP) || 0,
+                Level: parseInt(p.Level) || 1,
+                UserID: p.UserID,
+              }));
+
+              this.renderLeaderboardUI(mappedPlayers);
+            } else {
+              this.renderLeaderboardUI([
+                {
+                  Name: this.state.user.name,
+                  XP: this.state.user.xp,
+                  Level: this.state.user.level,
+                  UserID: this.state.user.id,
+                },
+              ]);
+            }
+          } catch (err) {
+            this.showToast("Gagal mengambil data global, mengaktifkan simulasi lokal.", true);
+            const fallbackList = [{ Name: this.state.user.name, XP: this.state.user.xp, Level: this.state.user.level, UserID: this.state.user.id }, ...this.db.simulatedCompetitors];
+            this.renderLeaderboardUI(fallbackList);
+          }
+        },
+
+        // ================= SETTINGS & INTEGRASI GOOGLE APPS SCRIPT =================
+        updateName() {
+          const newName = document.getElementById("settingName").value.trim();
+          if (newName) {
+            this.state.user.name = newName;
+            this.saveLocalData();
+            this.renderDashboard();
+            this.showToast("Nama profil diperbarui!");
+          }
+        },
+
+        saveGasUrl() {
+          const url = document.getElementById("settingGasUrl").value.trim();
+          this.state.gasUrl = url;
+          localStorage.setItem("sm_gas_url", url);
+          if (url) {
+            this.showToast("Menghubungkan ke server cloud...");
+            this.syncToGas();
+          } else {
+            this.showToast("Mode Lokal (Cloud dinonaktifkan)");
+          }
+        },
+
+        resetData() {
+          if (confirm("Apakah Anda yakin ingin menghapus seluruh progress belajar Anda secara permanen?")) {
+            localStorage.removeItem("sm_user");
+            localStorage.removeItem("sm_local_profiles");
+            localStorage.removeItem("sm_trans_history");
+            location.reload();
+          }
+        },
+
+        async syncToGas() {
+          if (!this.state.gasUrl) return;
+
+          try {
+            const res = await fetch(this.state.gasUrl, {
+              method: "POST",
+              body: JSON.stringify({
+                action: "saveProgress",
+                payload: {
+                  userId: this.state.user.id,
+                  name: this.state.user.name,
+                  xp: this.state.user.xp,
+                  level: this.state.user.level,
+                  streak: this.state.user.streak,
+                },
+              }),
+            });
+            const data = await res.json();
+            if (data.success) console.log("Cloud sync sukses!");
+          } catch (err) {
+            console.error("Gagal sinkronisasi dengan cloud:", err);
+          }
+        },
+      };
+
+      // Jalankan inisialisasi aplikasi saat jendela telah dimuat
+      window.onload = () => {
+        app.init();
+      };
+    </script>
+  </body>
+</html>
