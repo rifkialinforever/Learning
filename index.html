@@ -1,0 +1,2113 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Arivanta Digital - Premium Digital Solutions</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/htYsy92/Chat-GPT-Image-Jun-13-2026-03-16-31-PM.png" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans and Sora for premium design language -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+              sora: ["Sora", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                blue: "#0A66FF",
+                cyan: "#00C2FF",
+                purple: "#6C63FF",
+                dark: "#0F172A",
+                darker: "#090D1A",
+                card: "rgba(15, 23, 42, 0.6)",
+              },
+            },
+            animation: {
+              "pulse-glow": "pulseGlow 2s infinite alternate",
+              float: "float 6s ease-in-out infinite",
+              "float-delayed": "float 6s ease-in-out infinite 3s",
+              "spin-slow": "spin 12s linear infinite",
+              shimmer: "shimmer 2.5s infinite",
+            },
+            keyframes: {
+              pulseGlow: {
+                "0%": { boxShadow: "0 0 15px rgba(0, 194, 255, 0.2)" },
+                "100%": { boxShadow: "0 0 30px rgba(10, 102, 255, 0.6)" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+                "50%": { transform: "translateY(-15px) rotate(2deg)" },
+              },
+              shimmer: {
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(100%)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style type="text/css">
+      /* Custom glow scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #090d1a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #0a66ff, #00c2ff);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #00c2ff, #6c63ff);
+      }
+
+      /* Prevent any unwanted horizontal scrolls */
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* Premium glassmorphism utility classes */
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .glass-panel-interactive {
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(16px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      @media (min-width: 1024px) {
+        .glass-panel-interactive:hover {
+          border-color: rgba(0, 194, 255, 0.4);
+          box-shadow:
+            0 10px 30px -10px rgba(0, 194, 255, 0.3),
+            inset 0 1px 2px rgba(255, 255, 255, 0.1);
+          transform: translateY(-5px);
+        }
+      }
+
+      /* Dynamic Custom Cursor (Hidden on touch devices) */
+      @media (pointer: coarse), (max-width: 1023px) {
+        .custom-cursor,
+        .custom-cursor-dot {
+          display: none !important;
+        }
+      }
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(0, 194, 255, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        transition:
+          width 0.2s,
+          height 0.2s,
+          background-color 0.2s;
+      }
+      .custom-cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #00c2ff;
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      /* Text gradient defaults */
+      .text-gradient-primary {
+        background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .text-gradient-accent {
+        background: linear-gradient(135deg, #0a66ff 0%, #00c2ff 50%, #6c63ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* 3D card wrapper setups */
+      .card-perspective {
+        perspective: 1000px;
+      }
+
+      /* Custom glow nodes for canvas background */
+      #interactive-bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body class="bg-brand-darker text-white font-sans overflow-x-hidden antialiased">
+    <!-- Custom Interactive Background Grid & Stars -->
+    <canvas id="interactive-bg-canvas"></canvas>
+
+    <!-- Interactive Cursor Dot & Ring (Desktop Only) -->
+    <div class="custom-cursor shadow-[0_0_15px_rgba(0,194,255,0.4)]" id="customCursor"></div>
+    <div class="custom-cursor-dot" id="customCursorDot"></div>
+
+    <!-- Cinematic Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 z-[10000] bg-brand-darker flex flex-col items-center justify-center transition-all duration-1000">
+      <div class="relative flex flex-col items-center justify-center max-w-md w-full px-6">
+        <!-- Glowing Rotating Aura Behind Logo -->
+        <div class="absolute w-36 h-36 md:w-44 md:h-44 bg-brand-blue/20 rounded-full blur-[40px] animate-pulse-glow"></div>
+
+        <!-- Logo with dynamic rotation -->
+        <div class="relative mb-6 md:mb-8 transition-transform duration-700 animate-float">
+          <img
+            src="https://i.ibb.co.com/htYsy92/Chat-GPT-Image-Jun-13-2026-03-16-31-PM.png"
+            alt="Arivanta Logo"
+            class="w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_20px_rgba(0,194,255,0.6)]"
+          />
+        </div>
+
+        <!-- Title & Dynamic Subtitle -->
+        <h1 class="font-sora text-xl md:text-3xl font-bold tracking-wider mb-2 text-center text-gradient-primary">ARIVANTA DIGITAL</h1>
+        <p class="text-xs tracking-widest text-brand-cyan uppercase font-semibold text-center mb-6 md:mb-8">Transformasi Digital Premium</p>
+
+        <!-- Tech Progress Bar -->
+        <div class="w-full h-[3px] bg-slate-800 rounded-full overflow-hidden relative">
+          <div
+            id="loader-progress-bar"
+            class="absolute left-0 top-0 h-full w-0 bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-purple rounded-full transition-all duration-100 ease-out"
+          ></div>
+        </div>
+
+        <!-- Loader stats -->
+        <div class="flex justify-between items-center w-full mt-3 text-[10px] md:text-xs text-slate-400 font-mono tracking-widest">
+          <span class="animate-pulse">LOADING DIGITAL SYSTEM...</span>
+          <span id="loader-percent">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Glass Header / Navbar -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-3 md:py-4 px-3 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between glass-panel px-4 md:px-6 py-2.5 md:py-3.5 rounded-2xl shadow-lg transition-all duration-500" id="navbar-container">
+        <!-- Logo Left Section -->
+        <a href="#beranda" class="flex items-center gap-2 md:gap-3 group">
+          <div class="relative w-8 h-8 md:w-10 md:h-10 overflow-hidden rounded-xl transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(0,194,255,0.6)]">
+            <img src="https://i.ibb.co.com/htYsy92/Chat-GPT-Image-Jun-13-2026-03-16-31-PM.png" alt="Logo" class="w-full h-full object-contain" />
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-sora font-extrabold text-sm md:text-lg tracking-wide bg-gradient-to-r from-white to-slate-200 group-hover:from-brand-blue group-hover:to-brand-cyan bg-clip-text text-transparent transition-all duration-500"
+            >
+              ARIVANTA
+            </span>
+            <span class="text-[8px] md:text-[9px] font-mono tracking-widest uppercase text-brand-cyan">DIGITAL</span>
+          </div>
+        </a>
+
+        <!-- Desktop Menu (Center) -->
+        <nav class="hidden lg:flex items-center gap-6 xl:gap-8 font-medium text-slate-300">
+          <a href="#beranda" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Beranda
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#layanan" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Layanan
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#portofolio" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Portofolio
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#kalkulator" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Kalkulator Harga
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#tentang-kami" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Tentang Kami
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#faq" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            FAQ
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#kontak" class="relative py-2 text-sm tracking-wide transition-colors hover:text-white group">
+            Kontak
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+
+        <!-- Header CTA Right Section -->
+        <div class="hidden lg:flex items-center">
+          <a
+            href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20layanan%20yang%20tersedia."
+            target="_blank"
+            class="relative px-5 py-2.5 rounded-xl font-semibold overflow-hidden group transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-lg hover:shadow-[0_0_20px_rgba(0,194,255,0.5)] transform hover:-translate-y-0.5"
+          >
+            <span class="relative z-10 text-sm">Konsultasi Gratis</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1"></i>
+            <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-brand-purple to-brand-blue transition-transform duration-500 ease-out rounded-xl"></div>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button (Increased touch target padding) -->
+        <button id="mobile-menu-btn" class="lg:hidden p-3 -mr-2 text-slate-300 hover:text-white focus:outline-none relative z-50 min-w-[44px] min-h-[44px] flex items-center justify-center">
+          <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+          <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Drawer Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden fixed inset-y-0 right-0 w-full max-w-xs sm:max-w-sm bg-brand-darker/95 backdrop-blur-2xl z-45 border-l border-white/10 p-6 md:p-8 flex flex-col justify-between transition-transform duration-500 translate-x-full"
+      >
+        <div class="flex flex-col gap-5 mt-16">
+          <p class="text-[10px] tracking-widest text-slate-400 font-mono uppercase mb-1">MENU UTAMA</p>
+          <a href="#beranda" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Beranda</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#layanan" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Layanan</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#portofolio" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Portofolio</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#kalkulator" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Kalkulator</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#tentang-kami" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Tentang Kami</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#faq" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>FAQ</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+          <a href="#kontak" class="mobile-nav-link text-xl font-semibold text-white/85 hover:text-white transition-colors flex items-center justify-between py-1">
+            <span>Kontak</span> <i data-lucide="chevron-right" class="w-5 h-5 text-brand-cyan"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Drawer Footer Contact -->
+        <div class="flex flex-col gap-4 pt-4 border-t border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-slate-800/80 flex items-center justify-center border border-white/5 text-brand-cyan shrink-0">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-[10px] text-slate-400">Hubungi Langsung</p>
+              <p class="text-xs font-semibold">0882-0001-93986</p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20layanan%20yang%20tersedia."
+            target="_blank"
+            class="w-full text-center py-3 rounded-xl font-bold bg-gradient-to-r from-brand-blue to-brand-cyan text-white text-sm tracking-wide shadow-lg hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all min-h-[44px] flex items-center justify-center"
+          >
+            Konsultasi Gratis
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-screen flex items-center pt-24 pb-12 md:pb-16 overflow-hidden">
+      <!-- Background light shapes & radial gradient mapping -->
+      <div class="absolute top-[20%] left-[5%] w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-brand-blue/10 rounded-full blur-[80px] md:blur-[100px] animate-pulse-glow pointer-events-none"></div>
+      <div class="absolute bottom-[20%] right-[5%] w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-brand-purple/5 rounded-full blur-[100px] md:blur-[120px] animate-float pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <!-- Left Side: Interactive Copywriting & Typing Animation -->
+        <div class="flex flex-col gap-5 md:gap-6 text-left" id="hero-text-container">
+          <div class="inline-flex items-center gap-2 bg-slate-900/80 backdrop-blur-md border border-brand-blue/30 px-3 py-1.5 rounded-full w-fit">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
+            </span>
+            <span class="text-[10px] md:text-xs font-mono font-semibold text-brand-cyan tracking-wider uppercase">Premium Tech Partner</span>
+          </div>
+
+          <h1 class="font-sora text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight text-white">
+            Bangun Bisnis Digital <br class="hidden sm:inline" />
+            <span class="text-gradient-accent">Anda Lebih Professional</span>
+          </h1>
+
+          <!-- Dynamic Auto Typing text widget -->
+          <div class="text-base sm:text-lg md:text-xl font-medium text-slate-300 flex items-center flex-wrap gap-2 min-h-[3rem] md:min-h-0">
+            <span>Solusi Terpercaya untuk</span>
+            <span id="typing-text" class="text-brand-cyan font-bold border-r-2 border-brand-cyan pr-1"></span>
+          </div>
+
+          <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-xl">
+            Arivanta Digital membantu sekolah, UMKM, instansi, dan bisnis modern membangun solusi digital tangguh seperti Website Sistem Informasi, Aplikasi Kasir, Undangan Digital, hingga Custom
+            Software Engine.
+          </p>
+
+          <!-- Action Button Trigger Grid -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-2">
+            <a
+              href="#kalkulator"
+              class="px-6 py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-[0_0_20px_rgba(0,194,255,0.3)] hover:shadow-[0_0_35px_rgba(0,194,255,0.5)] transition-all duration-300 flex items-center justify-center gap-2 text-sm min-h-[44px]"
+            >
+              <span>Mulai Hitung Estimasi</span>
+              <i data-lucide="calculator" class="w-4.5 h-4.5"></i>
+            </a>
+            <a
+              href="#portofolio"
+              class="px-6 py-3.5 rounded-xl font-bold border border-white/10 hover:border-brand-blue/40 bg-slate-900/30 hover:bg-slate-900/60 backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2 text-sm min-h-[44px]"
+            >
+              <span>Lihat Portofolio</span>
+              <i data-lucide="layout" class="w-4.5 h-4.5 text-brand-purple"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side: Interactive Live Premium Glass dashboard -->
+        <div class="relative w-full aspect-square sm:aspect-video lg:aspect-square flex items-center justify-center" id="hero-mockup-container">
+          <!-- Background Glowing Cyber Ring -->
+          <div class="absolute inset-0 border border-brand-blue/20 rounded-full animate-spin-slow scale-90 opacity-40 md:opacity-60 pointer-events-none"></div>
+
+          <!-- Main Core Dashboard Platform Widget -->
+          <div class="w-full max-w-md sm:max-w-lg lg:max-w-full glass-panel rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-2xl relative z-10 border-white/15 overflow-hidden">
+            <!-- Shimmer Glow Animation Effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-cyan/10 to-transparent -translate-x-full animate-shimmer"></div>
+
+            <!-- Dashboard Premium Header -->
+            <div class="flex items-center justify-between border-b border-white/10 pb-3 md:pb-4 mb-4 md:mb-6">
+              <div class="flex items-center gap-1.5 md:gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                <span class="text-[10px] md:text-xs font-mono text-slate-400 ml-2 truncate max-w-[120px] sm:max-w-none">ARIVANTA_OS_v3.1.sh</span>
+              </div>
+              <span class="text-[8px] md:text-[10px] font-mono bg-brand-cyan/15 text-brand-cyan px-2 py-0.5 rounded border border-brand-cyan/25 shrink-0"> LIVE STATUS </span>
+            </div>
+
+            <!-- Inner Mockup Dashboard Grid -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
+              <!-- Stat Card 1 -->
+              <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col gap-1">
+                <span class="text-slate-400 text-[10px] md:text-xs flex items-center gap-1.5 font-medium"> <i data-lucide="globe" class="w-4 h-4 text-brand-blue"></i> Web Visitors </span>
+                <span class="text-lg md:text-2xl font-extrabold text-white tracking-tight">41.8K+</span>
+                <span class="text-[9px] md:text-[10px] text-emerald-400 font-semibold flex items-center gap-0.5"> <i data-lucide="trending-up" class="w-3 h-3"></i> +14.2% This Month </span>
+              </div>
+
+              <!-- Stat Card 2 -->
+              <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col gap-1">
+                <span class="text-slate-400 text-[10px] md:text-xs flex items-center gap-1.5 font-medium"> <i data-lucide="zap" class="w-4 h-4 text-brand-cyan"></i> Server Uptime </span>
+                <span class="text-lg md:text-2xl font-extrabold text-white tracking-tight">99.98%</span>
+                <span class="text-[9px] md:text-[10px] text-brand-cyan font-semibold">Optimized Core</span>
+              </div>
+            </div>
+
+            <!-- Holographic Mini Chart Element -->
+            <div class="mt-3 md:mt-4 glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] md:text-xs text-slate-400 font-semibold">Growth Analytics</span>
+                <span class="text-[8px] md:text-[10px] text-slate-500 font-mono">Real-time update</span>
+              </div>
+              <!-- Interactive SVG Sparkline Chart -->
+              <svg viewBox="0 0 300 100" class="w-full h-16 md:h-24 stroke-brand-cyan fill-none" stroke-width="3">
+                <path d="M 0,90 Q 30,20 60,70 T 120,40 T 180,10 T 240,50 T 300,30" class="drop-shadow-[0_0_8px_rgba(0,194,255,0.8)]" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Floating Interactive Widget Cards (Hidden on small mobile) -->
+          <div class="hidden sm:flex absolute -top-4 -left-4 glass-panel p-2.5 md:p-3.5 rounded-xl md:rounded-2xl items-center gap-3 shadow-xl border-brand-cyan/20">
+            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-white shrink-0">
+              <i data-lucide="shield-check" class="w-4.5 h-4.5"></i>
+            </div>
+            <div>
+              <p class="text-[10px] md:text-xs font-bold text-white">Secure Shield</p>
+              <p class="text-[8px] md:text-[9px] text-emerald-400 font-mono">100% Encrypted</p>
+            </div>
+          </div>
+
+          <div class="hidden sm:flex absolute -bottom-6 -right-4 glass-panel p-2.5 md:p-3.5 rounded-xl md:rounded-2xl items-center gap-3 shadow-xl border-brand-purple/20">
+            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-tr from-brand-purple to-pink-500 flex items-center justify-center text-white shrink-0">
+              <i data-lucide="cpu" class="w-4.5 h-4.5"></i>
+            </div>
+            <div>
+              <p class="text-[10px] md:text-xs font-bold text-white">High Speed</p>
+              <p class="text-[8px] md:text-[9px] text-brand-cyan font-mono">0.02s Load Time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Trust Metrics & Counters -->
+    <section class="py-12 md:py-16 relative z-10 border-t border-b border-white/5 bg-slate-900/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Badges List Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 mb-12 md:mb-16">
+          <div class="glass-panel px-4 py-3 rounded-xl flex items-center gap-2.5 justify-center md:justify-start">
+            <i data-lucide="award" class="w-5 h-5 text-brand-cyan shrink-0"></i>
+            <span class="text-xs md:text-sm font-semibold tracking-wide">Professional</span>
+          </div>
+          <div class="glass-panel px-4 py-3 rounded-xl flex items-center gap-2.5 justify-center md:justify-start">
+            <i data-lucide="shield-check" class="w-5 h-5 text-brand-blue shrink-0"></i>
+            <span class="text-xs md:text-sm font-semibold tracking-wide">Terpercaya</span>
+          </div>
+          <div class="glass-panel px-4 py-3 rounded-xl flex items-center gap-2.5 justify-center md:justify-start">
+            <i data-lucide="smartphone" class="w-5 h-5 text-brand-purple shrink-0"></i>
+            <span class="text-xs md:text-sm font-semibold tracking-wide">Responsif</span>
+          </div>
+          <div class="glass-panel px-4 py-3 rounded-xl flex items-center gap-2.5 justify-center md:justify-start">
+            <i data-lucide="tag" class="w-5 h-5 text-brand-cyan shrink-0"></i>
+            <span class="text-xs md:text-sm font-semibold tracking-wide">Bersahabat</span>
+          </div>
+          <div class="col-span-2 md:col-span-1 glass-panel px-4 py-3 rounded-xl flex items-center gap-2.5 justify-center md:justify-start">
+            <i data-lucide="zap" class="w-5 h-5 text-brand-blue shrink-0"></i>
+            <span class="text-xs md:text-sm font-semibold tracking-wide">Support Cepat</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Counter Statistics Showcase -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center" id="counters-container">
+          <div class="flex flex-col gap-0.5 md:gap-1">
+            <span class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gradient-accent tracking-tight" id="counter-projects">0</span>
+            <span class="text-[10px] md:text-xs uppercase tracking-widest text-slate-400 font-semibold font-mono">Project Selesai</span>
+          </div>
+          <div class="flex flex-col gap-0.5 md:gap-1">
+            <span class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gradient-accent tracking-tight" id="counter-clients">0</span>
+            <span class="text-[10px] md:text-xs uppercase tracking-widest text-slate-400 font-semibold font-mono">Klien Puas</span>
+          </div>
+          <div class="flex flex-col gap-0.5 md:gap-1">
+            <span class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gradient-accent tracking-tight" id="counter-responsive">0</span>
+            <span class="text-[10px] md:text-xs uppercase tracking-widest text-slate-400 font-semibold font-mono">Responsive %</span>
+          </div>
+          <div class="flex flex-col gap-0.5 md:gap-1">
+            <span class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gradient-accent tracking-tight" id="counter-support">0</span>
+            <span class="text-[10px] md:text-xs uppercase tracking-widest text-slate-400 font-semibold font-mono">Support Hour</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="py-16 md:py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title Header Block -->
+        <div class="text-center max-w-2xl mx-auto mb-12 md:mb-20 flex flex-col gap-3 md:gap-4">
+          <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">LAYANAN TERBAIK</span>
+          <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary">Solusi Terintegrasi Untuk Transformasi Anda</h2>
+          <div class="w-16 md:w-24 h-1 bg-gradient-to-r from-brand-blue to-brand-cyan mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Services Grid: 8 items with Lucide Icons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 card-perspective">
+          <!-- Service Card 1 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="school" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Website Sekolah</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Portal institusi lengkap terintegrasi berita, agenda, pengumuman, dan sistem e-learning modern.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="graduation-cap" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Sistem SPMB Online</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Pendaftaran Mahasiswa/Siswa baru otomatis, verifikasi digital, dan modul administrasi real-time.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="qr-code" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Sistem Absensi QR</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Absensi modern menggunakan QR Code dinamis terintegrasi, laporan instan, dan notifikasi otomatis WhatsApp.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="badge-check" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Sertifikat Generator</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Sistem generate e-sertifikat otomatis secara massal, verifikasi barcode, dan pengiriman otomatis instan.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 5 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="book-open" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Buku Tamu Digital</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Pengisian data kunjungan praktis di resepsionis digital, visual modern, ringkas, dan bebas repot.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 6 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="store" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Website UMKM</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Toko online modern dengan katalog visual interaktif, sistem pembayaran modern, dan checkout langsung WhatsApp.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 7 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="trending-up" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Landing Page Bisnis</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Halaman promosi berkonversi tinggi dirancang khusus untuk mempercepat penjualan & optimalisasi prospek bisnis.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+
+          <!-- Service Card 8 -->
+          <div class="glass-panel-interactive p-5 md:p-6 rounded-2xl md:rounded-3xl flex flex-col justify-between min-h-[300px] md:h-[360px] group relative overflow-hidden" data-tilt>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="flex flex-col gap-4 md:gap-5">
+              <div
+                class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl glass-panel border-white/10 flex items-center justify-center text-brand-blue lg:group-hover:text-brand-cyan lg:group-hover:scale-110 lg:group-hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all duration-500 shrink-0"
+              >
+                <i data-lucide="heart" class="w-6 h-6 md:w-7 md:h-7"></i>
+              </div>
+              <div>
+                <h3 class="font-sora text-lg md:text-xl font-bold mb-2 lg:group-hover:text-brand-cyan transition-colors">Undangan Digital</h3>
+                <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Undangan digital premium interaktif berbekal RSVP, galeri musik, album cinematic, dan kado digital langsung.</p>
+              </div>
+            </div>
+            <a href="#kontak" class="text-xs font-semibold text-brand-cyan lg:group-hover:text-white flex items-center gap-1.5 mt-4 transition-colors min-h-[44px]">
+              <span>Pesan Sekarang</span> <i data-lucide="arrow-right" class="w-4 h-4 transition-transform lg:group-hover:translate-x-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portofolio Section -->
+    <section id="portofolio" class="py-16 md:py-24 relative z-10 bg-slate-900/10 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header Title -->
+        <div class="text-center max-w-2xl mx-auto mb-10 md:mb-16 flex flex-col gap-3 md:gap-4">
+          <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">PORTOFOLIO KAMI</span>
+          <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary">Karya Digital Unggulan & Inovatif</h2>
+          <div class="w-16 md:w-24 h-1 bg-gradient-to-r from-brand-blue to-brand-cyan mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Filter Navigation Tabs (With Horizontal Scrolling Wrapper on Mobile) -->
+        <div class="overflow-x-auto pb-4 mb-8 -mx-4 px-4 scrollbar-thin">
+          <div class="flex items-center justify-start md:justify-center gap-2 md:gap-3 min-w-[720px] md:min-w-0">
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-white bg-brand-blue transition-all active min-h-[40px]"
+              data-filter="all"
+            >
+              Semua Project
+            </button>
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-slate-400 hover:text-white transition-all min-h-[40px]"
+              data-filter="sekolah"
+            >
+              Website Sekolah
+            </button>
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-slate-400 hover:text-white transition-all min-h-[40px]"
+              data-filter="spmb"
+            >
+              Sistem SPMB
+            </button>
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-slate-400 hover:text-white transition-all min-h-[40px]"
+              data-filter="absensi"
+            >
+              Sistem Absensi & Admin
+            </button>
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-slate-400 hover:text-white transition-all min-h-[40px]"
+              data-filter="umkm"
+            >
+              Website UMKM & Bisnis
+            </button>
+            <button
+              class="portfolio-filter-btn px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold glass-panel border-white/10 text-slate-400 hover:text-white transition-all min-h-[40px]"
+              data-filter="undangan"
+            >
+              Undangan Pernikahan
+            </button>
+          </div>
+        </div>
+
+        <!-- Masonry Grid Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="portfolio-grid">
+          <!-- Project 1 (Sekolah) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="sekolah">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/VWmZbDQN/Sekolah.png"
+                alt="Website Sekolah"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/00C2FF?text=Website+Sekolah'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-cyan/20 text-brand-cyan font-mono border border-brand-cyan/35 px-3 py-1 rounded-full">Web Sekolah</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Website Sekolah Terintegrasi (SD/SMP/SMA/SMK)</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Website informasi resmi sekolah untuk menampilkan profil, berita, galeri kegiatan, visi misi, serta pengumuman penting yang sangat mudah diakses via HP.
+              </p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20layanan%20Website%20Sekolah."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 (SPMB) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="spmb">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/mnCVDJV/SPMB.png"
+                alt="Sistem SPMB"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/6C63FF?text=PMB+Dashboard'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-purple/20 text-brand-purple font-mono border border-brand-purple/35 px-3 py-1 rounded-full">Sistem SPMB</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Sistem Penerimaan Siswa Baru (SPMB Online)</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Aplikasi pendaftaran siswa baru secara online untuk mempermudah panitia sekolah mendata calon siswa tanpa perlu antre di loket pendaftaran.
+              </p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Sistem%20SPMB%20Online."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3 (Absensi) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="absensi">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/NdwS6sy9/Absensi.png"
+                alt="Smart QR Attendance"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/00C2FF?text=QR+Absensi+Scanner'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-cyan/20 text-brand-cyan font-mono border border-brand-cyan/35 px-3 py-1 rounded-full">Real-time QR</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Sistem Absensi QR Scanner</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Dashboard internal pemantauan kehadiran instan terintegrasi WhatsApp bot notifier untuk pelaporan instan walimurid.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Sistem%20Absensi%20QR."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 4 (UMKM) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="umkm">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/RGbFpdfP/UMKM.png"
+                alt="Sleek UMKM store"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/6C63FF?text=UMKM+Smart+Shop'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-purple/20 text-brand-purple font-mono border border-brand-purple/35 px-3 py-1 rounded-full">E-Commerce</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Marketplace UMKM Pedesaan</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">E-commerce modern dengan galeri produk detail, review interaktif, kalkulator ongkos kirim otomatis, & checkout WA.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Website%20UMKM."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 5 (Undangan) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="undangan">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/b5nWqCrs/Pernikahan.png"
+                alt="Premium Wedding"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/00C2FF?text=Luxury+Wedding'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-cyan/20 text-brand-cyan font-mono border border-brand-cyan/35 px-3 py-1 rounded-full">Premium Invite</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Undangan Aesthetic Premium</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Desain premium minimalis bernuansa aesthetic gold dark, lengkap dengan background sound, gallery visual, RSVP, & digital gift.
+              </p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Undangan%20Digital."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 6 (Landing Page Bisnis) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="umkm">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/hjwTG1c/Landing-page-bisni.png"
+                alt="Landing Page Bisnis"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/6C63FF?text=Landing+Page+Bisnis'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-purple/20 text-brand-purple font-mono border border-brand-purple/35 px-3 py-1 rounded-full">Single Page</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Landing Page Bisnis & Jasa</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Halaman promosi berkonversi tinggi dirancang khusus untuk mempercepat penjualan & optimalisasi prospek bisnis lokal.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Landing%20Page%20Bisnis."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 7 (Generator Sertifikat) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="sekolah">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/rGg6xZ73/sertifikat.png"
+                alt="Sertifikat Generator"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/00C2FF?text=Generator+Sertifikat'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-cyan/20 text-brand-cyan font-mono border border-brand-cyan/35 px-3 py-1 rounded-full">Automation</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Sistem Generator E-Sertifikat</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Aplikasi generate otomatis e-sertifikat massal, verifikasi barcode validasi cepat, aman, dan bebas pemalsuan.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Generator%20Sertifikat."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 8 (Buku Tamu Digital) -->
+          <div class="portfolio-item glass-panel rounded-2xl md:rounded-3xl overflow-hidden group border-white/10 hover:border-brand-cyan/40 transition-all duration-500" data-category="absensi">
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src="https://i.ibb.co.com/FbjvJCBn/buku-tamu.png"
+                alt="Buku Tamu Digital"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onerror="this.src = 'https://placehold.co/600x400/0F172A/6C63FF?text=Buku+Tamu+Digital'"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-brand-darker via-brand-darker/50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6"
+              >
+                <span class="text-[10px] bg-brand-purple/20 text-brand-purple font-mono border border-brand-purple/35 px-3 py-1 rounded-full">Interactive Admin</span>
+              </div>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col gap-3">
+              <h3 class="font-sora font-bold text-lg md:text-xl text-white lg:group-hover:text-brand-cyan transition-colors">Buku Tamu Digital Instansi</h3>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">Pengisian data kunjungan digital praktis di front office, log aman real-time, dan ekspor laporan instan sekali klik.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20Buku%20Tamu%20Digital."
+                target="_blank"
+                class="w-full text-center py-2.5 rounded-xl border border-white/10 hover:border-brand-cyan/50 bg-slate-900/50 hover:bg-brand-blue text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+              >
+                <span>Hubungi Detail</span> <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Estimasi Harga (Interactive Calculator) -->
+    <section id="kalkulator" class="py-16 md:py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 flex flex-col gap-3 md:gap-4">
+          <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">HARGA RAMAH KANTONG</span>
+          <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary">Kalkulator Biaya Super Ekonomis</h2>
+          <div class="w-16 md:w-24 h-1 bg-gradient-to-r from-brand-blue to-brand-cyan mx-auto rounded-full"></div>
+          <p class="text-slate-400 text-xs md:text-sm">
+            Hitung perkiraan biaya secara transparan. Kami menawarkan paket spesial yang sangat murah dan ramah anggaran, dirancang khusus untuk kemajuan sekolah, UMKM, dan usaha lokal di pedesaan.
+          </p>
+        </div>
+
+        <!-- Main Interactive Calculator Panel Wrapper -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+          <!-- Left Column: Input Form Services selection (8 cols) -->
+          <div class="lg:col-span-8 glass-panel rounded-2xl md:rounded-3xl p-5 sm:p-8 border-white/10">
+            <h3 class="font-sora text-lg md:text-xl font-bold mb-5 md:mb-6 text-white flex items-center gap-2"><i data-lucide="sliders" class="text-brand-cyan w-5 h-5"></i> Pilih Jenis Layanan</h3>
+
+            <div class="space-y-6">
+              <!-- Primary Service Selector -->
+              <div class="flex flex-col gap-3">
+                <label class="text-xs font-bold text-slate-300 font-mono uppercase tracking-wider">Layanan Utama</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="primary-service-calc">
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="sekolah" class="accent-brand-cyan" checked />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Website Sekolah</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Portal, Berita & Informasi</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp1.200.000</span>
+                  </label>
+
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="spmb" class="accent-brand-cyan" />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Sistem SPMB Online</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Pendaftaran Siswa Baru</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp950.000</span>
+                  </label>
+
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="absensi" class="accent-brand-cyan" />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Sistem Absensi QR</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Kehadiran digital via WA</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp800.000</span>
+                  </label>
+
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="umkm" class="accent-brand-cyan" />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Website UMKM / Custom</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Katalog Produk & Chat WA</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp450.000</span>
+                  </label>
+
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="landing" class="accent-brand-cyan" />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Landing Page Bisnis</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Halaman Promosi Single-Page</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp300.000</span>
+                  </label>
+
+                  <label
+                    class="relative flex items-center justify-between p-4 rounded-xl md:rounded-2xl border border-white/10 bg-slate-900/30 cursor-pointer transition-all hover:border-brand-blue/40 select-none"
+                  >
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="calc-service" value="undangan" class="accent-brand-cyan" />
+                      <div class="flex flex-col">
+                        <span class="text-xs md:text-sm font-bold text-white">Undangan Digital</span>
+                        <span class="text-[10px] md:text-xs text-slate-400">Aesthetic, Musik & RSVP</span>
+                      </div>
+                    </div>
+                    <span class="text-xs md:text-sm font-bold text-brand-cyan shrink-0 ml-1">Rp99.000</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Real-time Price Estimation Showcase (4 cols) -->
+          <div class="lg:col-span-4 glass-panel rounded-2xl md:rounded-3xl p-5 md:p-6 border-brand-cyan/30 flex flex-col justify-between lg:sticky lg:top-24 gap-6">
+            <div>
+              <h4 class="font-sora text-base md:text-lg font-bold text-slate-300 mb-4 border-b border-white/10 pb-3">Ringkasan Estimasi</h4>
+
+              <div class="flex flex-col gap-3 mb-6">
+                <div class="flex justify-between items-center text-xs md:text-sm gap-2">
+                  <span class="text-slate-400 truncate">Layanan:</span>
+                  <span class="font-bold text-white truncate text-right" id="summary-service-name">Website Sekolah</span>
+                </div>
+                <div class="flex justify-between items-center text-xs md:text-sm border-b border-white/10 pb-4 gap-2">
+                  <span class="text-slate-400 truncate">Biaya:</span>
+                  <span class="font-mono text-white text-right" id="summary-service-price">Rp1.200.000</span>
+                </div>
+              </div>
+
+              <!-- Big Dynamic Animated Total Price Output -->
+              <div class="flex flex-col gap-2">
+                <span class="text-[10px] md:text-xs text-brand-cyan font-mono uppercase tracking-widest font-semibold">Total Perkiraan Biaya</span>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gradient-accent tracking-tight break-all" id="calc-total-price">Rp1.200.000</div>
+                <p class="text-[9px] md:text-[10px] text-slate-400 leading-relaxed italic">
+                  *Harga ini disesuaikan khusus untuk warga pedesaan agar tetap terjangkau dan merakyat namun hasil tetap profesional. Masih bisa dinegosiasikan lagi!
+                </p>
+              </div>
+            </div>
+
+            <!-- Direct Order Action Link to WhatsApp -->
+            <a
+              href="#"
+              id="order-whatsapp-btn"
+              target="_blank"
+              class="w-full text-center py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-lg hover:shadow-[0_0_15px_rgba(0,194,255,0.4)] transition-all flex items-center justify-center gap-2 text-sm min-h-[44px]"
+            >
+              <span>Pesan Paket Murah Ini</span> <i data-lucide="send" class="w-4.5 h-4.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Tentang Kami -->
+    <section id="tentang-kami" class="py-16 md:py-24 relative z-10 bg-slate-900/10 border-t border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Left Column: Core Value Narrative and dynamic list items -->
+          <div class="flex flex-col gap-5 md:gap-6 text-left">
+            <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">TENTANG KAMI</span>
+            <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary leading-tight">Mengapa Harus Bermitra Dengan Arivanta Digital?</h2>
+            <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+              Arivanta Digital adalah penyedia layanan pengembangan website premium, sistem informasi komprehensif, aplikasi berbasis web, dan solusi digital terbaik. Kami berkomitmen melayani
+              transformasi digital sekolah, instansi pendidikan, pelaku bisnis UMKM, dan startup secara cepat, modern, dan andal.
+            </p>
+
+            <!-- Core Value Grid Layout list -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-cyan shrink-0 mt-0.5">
+                  <i data-lucide="layout" class="w-4.5 h-4.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-xs md:text-sm">Desain Modern 2026</h4>
+                  <p class="text-[10px] md:text-xs text-slate-400">Tampilan memukau & trendi masa depan.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple shrink-0 mt-0.5">
+                  <i data-lucide="clock" class="w-4.5 h-4.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-xs md:text-sm">Pengerjaan Cepat</h4>
+                  <p class="text-[10px] md:text-xs text-slate-400">Efektif & siap pakai sesuai deadline.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-cyan shrink-0 mt-0.5">
+                  <i data-lucide="dollar-sign" class="w-4.5 h-4.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-xs md:text-sm">Harga Bersahabat</h4>
+                  <p class="text-[10px] md:text-xs text-slate-400">Transparan tanpa biaya tersembunyi.</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple shrink-0 mt-0.5">
+                  <i data-lucide="headphones" class="w-4.5 h-4.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-xs md:text-sm">Support Setelah Project</h4>
+                  <p class="text-[10px] md:text-xs text-slate-400">VIP Pemeliharaan & backup berkala.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Premium Cinematic Card Showcase -->
+          <div class="relative w-full aspect-square flex items-center justify-center">
+            <!-- Rotating Glowing Background Mesh -->
+            <div class="absolute w-[80%] h-[80%] bg-gradient-to-r from-brand-blue/15 to-brand-cyan/15 rounded-full blur-[60px] md:blur-[80px] pointer-events-none"></div>
+
+            <div class="relative w-full glass-panel rounded-2xl md:rounded-3xl p-5 md:p-8 border-white/10 shadow-2xl overflow-hidden flex flex-col justify-between h-full aspect-square max-h-[440px]">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-3">
+                  <img src="https://i.ibb.co.com/htYsy92/Chat-GPT-Image-Jun-13-2026-03-16-31-PM.png" alt="Arivanta" class="w-10 h-10 md:w-12 md:h-12 object-contain shrink-0" />
+                  <div class="truncate">
+                    <h5 class="text-xs md:text-sm font-bold truncate">Arivanta Digital</h5>
+                    <p class="text-[9px] md:text-[10px] text-slate-400 font-mono truncate">ARIVANTA_INFOGRAPHIC.json</p>
+                  </div>
+                </div>
+                <i data-lucide="info" class="w-4 h-4 md:w-5 md:h-5 text-brand-cyan animate-pulse shrink-0"></i>
+              </div>
+
+              <!-- Core Advantages visual timelines -->
+              <div class="flex flex-col gap-4 my-5">
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between text-[10px] md:text-xs font-semibold">
+                    <span class="text-slate-300">Responsive & Mobile Friendly</span>
+                    <span class="text-brand-cyan font-mono">100%</span>
+                  </div>
+                  <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-brand-blue to-brand-cyan w-[100%] rounded-full"></div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between text-[10px] md:text-xs font-semibold">
+                    <span class="text-slate-300">SEO Friendly Optimization</span>
+                    <span class="text-brand-cyan font-mono">98%</span>
+                  </div>
+                  <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-brand-blue to-brand-cyan w-[98%] rounded-full"></div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between text-[10px] md:text-xs font-semibold">
+                    <span class="text-slate-300">Keamanan Enkripsi SSL</span>
+                    <span class="text-brand-cyan font-mono">100%</span>
+                  </div>
+                  <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-brand-blue to-brand-cyan w-[100%] rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini Trust Card Overlay inside grid -->
+              <div class="p-3 md:p-4 bg-brand-cyan/10 border border-brand-cyan/20 rounded-xl md:rounded-2xl flex items-center gap-3 shrink-0">
+                <div
+                  class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-white font-bold shrink-0 text-xs md:text-sm"
+                >
+                  100%
+                </div>
+                <p class="text-[10px] md:text-xs text-slate-300 leading-normal font-semibold">
+                  Semua website yang diproduksi terintegrasi sistem clean coding sehingga lolos Google Lighthouse audit terbaik.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq" class="py-16 md:py-24 relative z-10 bg-slate-900/10 border-t border-b border-white/5">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 flex flex-col gap-3 md:gap-4">
+          <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">PERTANYAAN UMUM</span>
+          <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary">Frequently Asked Questions</h2>
+          <div class="w-16 md:w-24 h-1 bg-gradient-to-r from-brand-blue to-brand-cyan mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Accordion items -->
+        <div class="flex flex-col gap-3 md:gap-4">
+          <!-- FAQ 1 -->
+          <div class="glass-panel rounded-xl md:rounded-2xl border-white/10 overflow-hidden transition-all duration-300" data-faq>
+            <button class="w-full text-left p-4 md:p-6 flex justify-between items-center gap-4 hover:bg-slate-900/40 transition-colors focus:outline-none min-h-[48px]">
+              <span class="font-bold text-white text-xs md:text-base leading-snug">Berapa lama pengerjaan sebuah website?</span>
+              <div class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 border border-white/10 faq-icon-wrapper transition-transform duration-300">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-slate-900/10">
+              <p class="p-4 md:p-6 text-xs md:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                Pengerjaan bervariasi tergantung kerumitan. Landing page bisnis berkisar 3-5 hari kerja. Sementara Website Sekolah, Sistem SPMB, dan Absensi QR memakan waktu sekitar 1-3 minggu
+                termasuk proses integrasi dan pengujian sistem menyeluruh.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="glass-panel rounded-xl md:rounded-2xl border-white/10 overflow-hidden transition-all duration-300" data-faq>
+            <button class="w-full text-left p-4 md:p-6 flex justify-between items-center gap-4 hover:bg-slate-900/40 transition-colors focus:outline-none min-h-[48px]">
+              <span class="font-bold text-white text-xs md:text-base leading-snug">Apakah saya bisa mengajukan revisi pengerjaan?</span>
+              <div class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 border border-white/10 faq-icon-wrapper transition-transform duration-300">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-slate-900/10">
+              <p class="p-4 md:p-6 text-xs md:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                Tentu saja! Kami memberikan garansi revisi desain dan tata letak selama masa pengerjaan berlangsung untuk memastikan website benar-benar sesuai dengan representasi visual instansi atau
+                bisnis Anda.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="glass-panel rounded-xl md:rounded-2xl border-white/10 overflow-hidden transition-all duration-300" data-faq>
+            <button class="w-full text-left p-4 md:p-6 flex justify-between items-center gap-4 hover:bg-slate-900/40 transition-colors focus:outline-none min-h-[48px]">
+              <span class="font-bold text-white text-xs md:text-base leading-snug">Apakah mendapat support penuh setelah project selesai?</span>
+              <div class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 border border-white/10 faq-icon-wrapper transition-transform duration-300">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-slate-900/10">
+              <p class="p-4 md:p-6 text-xs md:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                Ya, semua paket pengerjaan sudah disertai garansi maintenance gratis (monitoring keamanan & backup mingguan) selama 3 hingga 12 bulan demi menjaga stabilitas performa website Anda di
+                hosting server.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="glass-panel rounded-xl md:rounded-2xl border-white/10 overflow-hidden transition-all duration-300" data-faq>
+            <button class="w-full text-left p-4 md:p-6 flex justify-between items-center gap-4 hover:bg-slate-900/40 transition-colors focus:outline-none min-h-[48px]">
+              <span class="font-bold text-white text-xs md:text-base leading-snug">Apakah saya bisa memesan fitur kustom yang tidak tertulis?</span>
+              <div class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 border border-white/10 faq-icon-wrapper transition-transform duration-300">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-slate-900/10">
+              <p class="p-4 md:p-6 text-xs md:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                Sangat bisa! Kami merupakan tim pengembang berpengalaman (Full Stack Web Developer). Semua jenis kustom integrasi database, integrasi sistem API, sistem pembayaran, maupun alur
+                birokrasi digital kustom siap kami layani secara profesional.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="glass-panel rounded-xl md:rounded-2xl border-white/10 overflow-hidden transition-all duration-300" data-faq>
+            <button class="w-full text-left p-4 md:p-6 flex justify-between items-center gap-4 hover:bg-slate-900/40 transition-colors focus:outline-none min-h-[48px]">
+              <span class="font-bold text-white text-xs md:text-base leading-snug">Apakah website yang dibuat dijamin responsive?</span>
+              <div class="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 border border-white/10 faq-icon-wrapper transition-transform duration-300">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-slate-900/10">
+              <p class="p-4 md:p-6 text-xs md:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                Pasti. Seluruh produk buatan Arivanta Digital menggunakan pendekatan Mobile-First Responsive Design. Website dipastikan tampil menakjubkan dan beroperasi sempurna ketika diakses
+                melalui layar smartphone, tablet, laptop, maupun desktop screen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Kontak -->
+    <section id="kontak" class="py-16 md:py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-stretch">
+          <!-- Left Column: Contact details (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col justify-between gap-6 md:gap-8">
+            <div class="flex flex-col gap-4 md:gap-6">
+              <span class="text-brand-cyan font-mono text-xs md:text-sm tracking-widest uppercase font-semibold">HUBUNGI KAMI</span>
+              <h2 class="font-sora text-2xl md:text-5xl font-extrabold tracking-tight text-gradient-primary leading-none">Mulai Proyek Impian Anda</h2>
+              <p class="text-slate-400 text-xs md:text-sm leading-relaxed">
+                Kami siap mendengarkan rencana besar Anda. Isi formulir konsultasi atau hubungi kami langsung via WhatsApp untuk respons cepat 24/7.
+              </p>
+
+              <!-- Glass details info list -->
+              <div class="flex flex-col gap-3 md:gap-4 mt-2">
+                <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-3.5 border-white/10">
+                  <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center text-brand-cyan shrink-0">
+                    <i data-lucide="phone" class="w-4.5 h-4.5 md:w-5 md:h-5 animate-pulse"></i>
+                  </div>
+                  <div class="truncate">
+                    <p class="text-[9px] md:text-[10px] text-slate-400 font-mono tracking-wider uppercase">WHATSAPP CALL/CHAT</p>
+                    <a href="https://wa.me/62882000193986" target="_blank" class="text-xs md:text-sm font-bold text-white hover:text-brand-cyan transition-colors"> 0882 0001 93986 </a>
+                  </div>
+                </div>
+
+                <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-3.5 border-white/10">
+                  <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-purple/20 flex items-center justify-center text-brand-purple shrink-0">
+                    <i data-lucide="mail" class="w-4.5 h-4.5 md:w-5 md:h-5"></i>
+                  </div>
+                  <div class="truncate">
+                    <p class="text-[9px] md:text-[10px] text-slate-400 font-mono tracking-wider uppercase">EMAIL SUPPORT</p>
+                    <p class="text-xs md:text-sm font-bold text-white truncate">arivantadigital@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct WA Call-To-Action glowing card -->
+            <div class="glass-panel p-5 md:p-6 rounded-2xl md:rounded-3xl border-brand-cyan/20 bg-gradient-to-tr from-slate-900/60 to-brand-blue/10 flex flex-col gap-3.5">
+              <h4 class="font-bold text-white text-sm md:text-base">Butuh Konsultasi Kilat?</h4>
+              <p class="text-[11px] md:text-xs text-slate-400 leading-normal">Klik tombol di bawah untuk langsung terhubung dengan lead developer kami.</p>
+              <a
+                href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20layanan%20yang%20tersedia."
+                target="_blank"
+                class="w-full text-center py-3 rounded-xl bg-gradient-to-r from-brand-blue to-brand-cyan text-white text-xs md:text-sm font-bold shadow-lg hover:shadow-[0_0_15px_rgba(0,194,255,0.45)] transition-all flex items-center justify-center gap-2 min-h-[44px]"
+              >
+                <i data-lucide="message-square" class="w-4.5 h-4.5"></i> <span>Hubungi via WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Consultation Form (7 cols) -->
+          <div class="lg:col-span-7 glass-panel rounded-2xl md:rounded-3xl p-5 sm:p-8 border-white/10 flex flex-col justify-between">
+            <div>
+              <h3 class="font-sora text-lg md:text-xl font-bold mb-5 md:mb-6 text-white flex items-center gap-2">
+                <i data-lucide="edit-3" class="text-brand-cyan w-5 h-5"></i> Formulir Konsultasi Proyek
+              </h3>
+
+              <form id="consultation-form" class="space-y-4 md:space-y-5">
+                <!-- Name Input -->
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] md:text-xs font-bold text-slate-400 font-mono tracking-wider uppercase">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    id="form-name"
+                    required
+                    placeholder="Masukkan nama Anda..."
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3.5 text-xs md:text-sm text-white focus:outline-none focus:border-brand-cyan transition-all min-h-[44px]"
+                  />
+                </div>
+
+                <!-- Phone/WhatsApp Input -->
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] md:text-xs font-bold text-slate-400 font-mono tracking-wider uppercase">Nomor WhatsApp</label>
+                  <input
+                    type="tel"
+                    id="form-whatsapp"
+                    required
+                    placeholder="Contoh: 081234567xxx"
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3.5 text-xs md:text-sm text-white focus:outline-none focus:border-brand-cyan transition-all min-h-[44px]"
+                  />
+                </div>
+
+                <!-- Service Type Select -->
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] md:text-xs font-bold text-slate-400 font-mono tracking-wider uppercase">Jenis Layanan</label>
+                  <select
+                    id="form-service"
+                    required
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3.5 text-xs md:text-sm text-white focus:outline-none focus:border-brand-cyan transition-all cursor-pointer min-h-[44px]"
+                  >
+                    <option value="" disabled selected class="bg-brand-darker">-- Pilih Jenis Layanan --</option>
+                    <option value="Website Sekolah" class="bg-brand-darker">Website Sekolah</option>
+                    <option value="Sistem SPMB Online" class="bg-brand-darker">Sistem SPMB Online</option>
+                    <option value="Sistem Absensi QR" class="bg-brand-darker">Sistem Absensi QR Code</option>
+                    <option value="Generator Sertifikat" class="bg-brand-darker">Generator Sertifikat Otomatis</option>
+                    <option value="Buku Tamu Digital" class="bg-brand-darker">Buku Tamu Digital</option>
+                    <option value="Website UMKM" class="bg-brand-darker">Website UMKM</option>
+                    <option value="Landing Page Bisnis" class="bg-brand-darker">Landing Page Bisnis</option>
+                    <option value="Undangan Digital" class="bg-brand-darker">Undangan Pernikahan Digital</option>
+                    <option value="Custom Project Lainnya" class="bg-brand-darker">Lainnya (Kustom Project)</option>
+                  </select>
+                </div>
+
+                <!-- Message Area -->
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] md:text-xs font-bold text-slate-400 font-mono tracking-wider uppercase">Deskripsi Pesan / Pertanyaan</label>
+                  <textarea
+                    id="form-message"
+                    rows="4"
+                    required
+                    placeholder="Jelaskan kebutuhan website Anda atau pertanyaan..."
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-xs md:text-sm text-white focus:outline-none focus:border-brand-cyan transition-all resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Form status messages -->
+                <div id="form-error-toast" class="hidden p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-400"></div>
+
+                <button
+                  type="submit"
+                  class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-lg hover:shadow-[0_0_20px_rgba(0,194,255,0.4)] transition-all flex items-center justify-center gap-2 mt-2 min-h-[44px]"
+                >
+                  <i data-lucide="send" class="w-4.5 h-4.5"></i> <span>Kirim Formulir ke WhatsApp</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Utility Buttons -->
+    <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[45] flex flex-col gap-3">
+      <!-- Floating Back To Top -->
+      <button
+        id="back-to-top-btn"
+        class="hidden w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel border-white/15 flex items-center justify-center text-brand-cyan hover:text-white transition-all duration-300 shadow-xl focus:outline-none min-h-[44px] min-w-[44px]"
+      >
+        <i data-lucide="chevron-up" class="w-5.5 h-5.5"></i>
+      </button>
+
+      <!-- Floating WhatsApp Widget -->
+      <a
+        href="https://wa.me/62882000193986?text=Halo%20Arivanta%20Digital,%20saya%20tertarik%20dengan%20layanan%20yang%20tersedia."
+        target="_blank"
+        class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center text-white shadow-2xl transition-all duration-300 hover:scale-110 shadow-emerald-500/30 animate-bounce relative group focus:outline-none min-h-[44px] min-w-[44px]"
+      >
+        <!-- Pulse ripple wave -->
+        <span class="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-25 pointer-events-none"></span>
+        <i data-lucide="phone" class="w-6 h-6 fill-current"></i>
+      </a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-brand-darker border-t border-white/5 py-12 md:py-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-12 md:mb-16">
+        <!-- Left Grid Column: Brand narrative block (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-5">
+          <a href="#beranda" class="flex items-center gap-3 w-fit">
+            <img src="https://i.ibb.co.com/htYsy92/Chat-GPT-Image-Jun-13-2026-03-16-31-PM.png" alt="Arivanta" class="w-10 h-10 md:w-12 md:h-12 object-contain shrink-0" />
+            <div class="flex flex-col">
+              <span class="font-sora font-extrabold text-base md:text-xl tracking-wide text-white">ARIVANTA</span>
+              <span class="text-[9px] md:text-[10px] font-mono tracking-widest uppercase text-brand-cyan">DIGITAL</span>
+            </div>
+          </a>
+          <p class="text-slate-400 text-xs md:text-sm leading-relaxed max-w-sm font-medium">
+            Kami hadir mendefinisikan ulang batas efisiensi digital Anda. Menghubungkan imajinasi bisnis dengan realitas software berkualitas tinggi.
+          </p>
+          <div class="flex items-center gap-3 text-slate-400">
+            <a
+              href="#"
+              class="w-9 h-9 rounded-lg glass-panel flex items-center justify-center border-white/10 hover:border-brand-cyan/40 hover:text-brand-cyan transition-colors min-h-[36px] min-w-[36px]"
+            >
+              <i data-lucide="instagram" class="w-4.5 h-4.5"></i>
+            </a>
+            <a
+              href="#"
+              class="w-9 h-9 rounded-lg glass-panel flex items-center justify-center border-white/10 hover:border-brand-cyan/40 hover:text-brand-cyan transition-colors min-h-[36px] min-w-[36px]"
+            >
+              <i data-lucide="twitter" class="w-4.5 h-4.5"></i>
+            </a>
+            <a
+              href="#"
+              class="w-9 h-9 rounded-lg glass-panel flex items-center justify-center border-white/10 hover:border-brand-cyan/40 hover:text-brand-cyan transition-colors min-h-[36px] min-w-[36px]"
+            >
+              <i data-lucide="linkedin" class="w-4.5 h-4.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Middle Grid Column: Quick Links (3 cols) -->
+        <div class="lg:col-span-3 flex flex-col gap-4">
+          <h4 class="font-sora font-bold text-sm md:text-base text-white border-b border-white/10 pb-2">Menu Cepat</h4>
+          <div class="flex flex-col gap-2 text-xs md:text-sm text-slate-400 font-medium">
+            <a href="#beranda" class="hover:text-brand-cyan transition-colors py-1">Beranda</a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors py-1">Layanan Unggulan</a>
+            <a href="#portofolio" class="hover:text-brand-cyan transition-colors py-1">Portofolio Karya</a>
+            <a href="#kalkulator" class="hover:text-brand-cyan transition-colors py-1">Kalkulator Biaya</a>
+            <a href="#tentang-kami" class="hover:text-brand-cyan transition-colors py-1">Tentang Kami</a>
+            <a href="#faq" class="hover:text-brand-cyan transition-colors py-1">FAQ</a>
+          </div>
+        </div>
+
+        <!-- Right Grid Column: Core Services Quick list (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <h4 class="font-sora font-bold text-sm md:text-base text-white border-b border-white/10 pb-2">Daftar Layanan</h4>
+          <div class="flex flex-col gap-2.5 text-xs md:text-sm text-slate-400 font-medium">
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Website Sekolah
+            </a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Sistem SPMB Online
+            </a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Sistem Absensi QR Code
+            </a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Website UMKM & E-Commerce
+            </a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Landing Page Bisnis
+            </a>
+            <a href="#layanan" class="hover:text-brand-cyan transition-colors flex items-center gap-2 py-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0"></span> Undangan Pernikahan Digital
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Footer Base Section -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5 pt-6 md:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] md:text-xs text-slate-500 font-mono text-center sm:text-left"
+      >
+        <span>Copyright © 2026 ARIVANTA DIGITAL. All Rights Reserved.</span>
+        <div class="flex gap-4 md:gap-6">
+          <a href="#" class="hover:text-brand-cyan transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-brand-cyan transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.addEventListener("DOMContentLoaded", () => {
+        lucide.createIcons();
+        initCustomCursor();
+        initLoadingProgressBar();
+        initBackgroundCanvas();
+        initHeaderScrollEffects();
+        initMobileMenu();
+        initTypingEffect();
+        initInteractiveCounters();
+        init3DTiltEffects();
+        initPortfolioFilter();
+        initPriceCalculator();
+        initFAQAccordions();
+        initConsultationForm();
+        initBackToTopButton();
+      });
+
+      /* CUSTOM CURSOR FUNCTIONALITIES */
+      function initCustomCursor() {
+        const cursor = document.getElementById("customCursor");
+        const dot = document.getElementById("customCursorDot");
+
+        // Check if pointer is coarse (touch screen)
+        if (window.matchMedia("(pointer: coarse)").matches) {
+          return;
+        }
+
+        document.addEventListener("mousemove", (e) => {
+          cursor.style.left = e.clientX + "px";
+          cursor.style.top = e.clientY + "px";
+          dot.style.left = e.clientX + "px";
+          dot.style.top = e.clientY + "px";
+        });
+
+        // Hover state scaling effects for interactive tags
+        const interactiveSelectors = "a, button, label, input, select, textarea, [data-faq]";
+        document.querySelectorAll(interactiveSelectors).forEach((elem) => {
+          elem.addEventListener("mouseenter", () => {
+            cursor.style.width = "35px";
+            cursor.style.height = "35px";
+            cursor.style.backgroundColor = "rgba(0, 194, 255, 0.1)";
+            cursor.style.borderColor = "#00C2FF";
+          });
+          elem.addEventListener("mouseleave", () => {
+            cursor.style.width = "20px";
+            cursor.style.height = "20px";
+            cursor.style.backgroundColor = "transparent";
+            cursor.style.borderColor = "rgba(0, 194, 255, 0.5)";
+          });
+        });
+      }
+
+      function initLoadingProgressBar() {
+        const bar = document.getElementById("loader-progress-bar");
+        const percentLabel = document.getElementById("loader-percent");
+        const loaderScreen = document.getElementById("loading-screen");
+        let progress = 0;
+
+        const progressInterval = setInterval(() => {
+          progress += Math.floor(Math.random() * 15) + 5;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(progressInterval);
+
+            // Cinematic fade & scale reveal animation
+            setTimeout(() => {
+              loaderScreen.classList.add("opacity-0", "scale-95");
+              setTimeout(() => {
+                loaderScreen.style.display = "none";
+              }, 1000);
+            }, 500);
+          }
+          bar.style.width = progress + "%";
+          percentLabel.innerText = progress + "%";
+        }, 60);
+      }
+
+      /* HIGH PERFORMANCE HTML5 CANVAS GRID PARTICLES */
+      function initBackgroundCanvas() {
+        const canvas = document.getElementById("interactive-bg-canvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          // Adjust dynamic interaction radius based on screen size
+          mouse.radius = window.innerWidth < 768 ? 80 : 150;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        // Follow mouse movement dynamically
+        window.addEventListener("mousemove", (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+        window.addEventListener("mouseleave", () => {
+          mouse.x = null;
+          mouse.y = null;
+        });
+
+        // Gentle touchscreen tracking support
+        window.addEventListener("touchmove", (e) => {
+          if (e.touches.length > 0) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+          }
+        });
+        window.addEventListener("touchend", () => {
+          mouse.x = null;
+          mouse.y = null;
+        });
+
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.density = Math.random() * 25 + 8;
+            this.color = Math.random() > 0.5 ? "rgba(0, 194, 255, 0.35)" : "rgba(108, 99, 255, 0.25)";
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+          }
+          update() {
+            if (mouse.x != null && mouse.y != null) {
+              let dx = mouse.x - this.x;
+              let dy = mouse.y - this.y;
+              let distance = Math.sqrt(dx * dx + dy * dy);
+              let forceDirectionX = dx / distance;
+              let forceDirectionY = dy / distance;
+              let maxDistance = mouse.radius;
+              let force = (maxDistance - distance) / maxDistance;
+              let directionX = forceDirectionX * force * this.density;
+              let directionY = forceDirectionY * force * this.density;
+
+              if (distance < mouse.radius) {
+                this.x -= directionX;
+                this.y -= directionY;
+              } else {
+                if (this.x !== this.baseX) {
+                  let dx = this.x - this.baseX;
+                  this.x -= dx / 12;
+                }
+                if (this.y !== this.baseY) {
+                  let dy = this.y - this.baseY;
+                  this.y -= dy / 12;
+                }
+              }
+            } else {
+              if (this.x !== this.baseX) {
+                let dx = this.x - this.baseX;
+                this.x -= dx / 15;
+              }
+              if (this.y !== this.baseY) {
+                let dy = this.y - this.baseY;
+                this.y -= dy / 15;
+              }
+            }
+          }
+        }
+
+        function setup() {
+          particles = [];
+          // Low density scaling on mobile viewport to maintain 60 FPS
+          const scalar = window.innerWidth < 768 ? 20000 : 12000;
+          const numberOfParticles = Math.floor((canvas.width * canvas.height) / scalar);
+          for (let i = 0; i < numberOfParticles; i++) {
+            particles.push(new Particle());
+          }
+        }
+        setup();
+        window.addEventListener("resize", setup);
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+          }
+          requestAnimationFrame(animate);
+        }
+        animate();
+      }
+
+      /* HEADER GLASS SCROLL EFFECTS */
+      function initHeaderScrollEffects() {
+        const header = document.getElementById("main-header");
+        const navContainer = document.getElementById("navbar-container");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 30) {
+            header.classList.remove("py-3", "md:py-4");
+            header.classList.add("py-1.5", "md:py-2");
+            navContainer.classList.add("shadow-[0_4px_30px_rgba(0,0,0,0.5)]", "bg-slate-900/85", "border-white/15");
+          } else {
+            header.classList.remove("py-1.5", "md:py-2");
+            header.classList.add("py-3", "md:py-4");
+            navContainer.classList.remove("shadow-[0_4px_30px_rgba(0,0,0,0.5)]", "bg-slate-900/85", "border-white/15");
+          }
+        });
+      }
+
+      /* RESPONSIVE MOBILE SIDEBAR DRAWER */
+      function initMobileMenu() {
+        const btn = document.getElementById("mobile-menu-btn");
+        const menu = document.getElementById("mobile-menu");
+        const iconOpen = document.getElementById("menu-icon-open");
+        const iconClose = document.getElementById("menu-icon-close");
+        let isOpen = false;
+
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isOpen = !isOpen;
+          toggleMenu();
+        });
+
+        // Close mobile menu on clicking any navigation link
+        document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            isOpen = false;
+            toggleMenu();
+          });
+        });
+
+        // Close mobile menu when clicking outside drawer
+        document.addEventListener("click", (e) => {
+          if (isOpen && !menu.contains(e.target) && !btn.contains(e.target)) {
+            isOpen = false;
+            toggleMenu();
+          }
+        });
+
+        function toggleMenu() {
+          if (isOpen) {
+            menu.classList.remove("hidden");
+            setTimeout(() => {
+              menu.classList.remove("translate-x-full");
+            }, 50);
+            iconOpen.classList.add("hidden");
+            iconClose.classList.remove("hidden");
+          } else {
+            menu.classList.add("translate-x-full");
+            iconOpen.classList.remove("hidden");
+            iconClose.classList.add("hidden");
+            setTimeout(() => {
+              menu.classList.add("hidden");
+            }, 500);
+          }
+        }
+      }
+
+      /* DYNAMIC AUTO TYPING WIDGET */
+      function initTypingEffect() {
+        const element = document.getElementById("typing-text");
+        const words = ["Website Sekolah", "Sistem SPMB Online", "Sistem Absensi QR", "Buku Tamu Digital", "Website UMKM"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let speed = 100;
+
+        function type() {
+          const currentWord = words[wordIndex];
+          if (isDeleting) {
+            element.innerText = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+            speed = 50;
+          } else {
+            element.innerText = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+            speed = 150;
+          }
+
+          if (!isDeleting && charIndex === currentWord.length) {
+            speed = 2000;
+            isDeleting = true;
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            speed = 500;
+          }
+
+          setTimeout(type, speed);
+        }
+        type();
+      }
+
+      /* INTERACTIVE STATS SCROLL-TRIGGERED COUNTERS */
+      function initInteractiveCounters() {
+        const targets = [
+          { id: "counter-projects", value: 50, suffix: "+" },
+          { id: "counter-clients", value: 25, suffix: "+" },
+          { id: "counter-responsive", value: 100, suffix: "%" },
+          { id: "counter-support", value: 24, suffix: "/7" },
+        ];
+
+        const options = { threshold: 0.3, rootMargin: "0px" };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              targets.forEach((t) => animateCount(t.id, t.value, t.suffix));
+              observer.disconnect();
+            }
+          });
+        }, options);
+
+        const container = document.getElementById("counters-container");
+        if (container) observer.observe(container);
+
+        function animateCount(id, max, suffix) {
+          const element = document.getElementById(id);
+          if (!element) return;
+          let current = 0;
+          const duration = 2000;
+          const step = max / (duration / 16);
+
+          function update() {
+            current += step;
+            if (current >= max) {
+              element.innerText = max + suffix;
+            } else {
+              element.innerText = Math.floor(current) + suffix;
+              requestAnimationFrame(update);
+            }
+          }
+          update();
+        }
+      }
+
+      /* REAL 3D PERSPECTIVE TILT EFFECTS FOR GLASS CARDS */
+      function init3DTiltEffects() {
+        const cards = document.querySelectorAll("[data-tilt]");
+
+        // Check for touchscreen/mobile viewport and ignore tilt tracking
+        if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 1024) {
+          return;
+        }
+
+        cards.forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const midX = rect.width / 2;
+            const midY = rect.height / 2;
+            const tiltX = (y - midY) / 15;
+            const tiltY = -(x - midX) / 15;
+
+            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+          });
+        });
+      }
+
+      /* PORTOFOLIO MASONRY CATEGORY FILTER TABS */
+      function initPortfolioFilter() {
+        const buttons = document.querySelectorAll(".portfolio-filter-btn");
+        const items = document.querySelectorAll(".portfolio-item");
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            buttons.forEach((b) => {
+              b.classList.remove("bg-brand-blue", "text-white");
+              b.classList.add("text-slate-400");
+            });
+            btn.classList.add("bg-brand-blue", "text-white");
+            btn.classList.remove("text-slate-400");
+
+            const category = btn.getAttribute("data-filter");
+
+            items.forEach((item) => {
+              const itemCategory = item.getAttribute("data-category");
+              if (category === "all" || itemCategory === category) {
+                item.style.display = "block";
+                setTimeout(() => {
+                  item.style.opacity = "1";
+                  item.style.transform = "scale(1)";
+                }, 50);
+              } else {
+                item.style.opacity = "0";
+                item.style.transform = "scale(0.85)";
+                setTimeout(() => {
+                  item.style.display = "none";
+                }, 400);
+              }
+            });
+          });
+        });
+      }
+
+      /* INTERACTIVE REAL-TIME PRICING CALCULATOR */
+      function initPriceCalculator() {
+        const services = {
+          sekolah: { name: "Website Sekolah", price: 1200000 },
+          spmb: { name: "Sistem SPMB Online", price: 950000 },
+          absensi: { name: "Sistem Absensi QR", price: 800000 },
+          umkm: { name: "Website UMKM / Custom", price: 450000 },
+          landing: { name: "Landing Page Bisnis", price: 300000 },
+          undangan: { name: "Undangan Digital", price: 99000 },
+        };
+
+        const radios = document.querySelectorAll('input[name="calc-service"]');
+        const summaryName = document.getElementById("summary-service-name");
+        const summaryPrice = document.getElementById("summary-service-price");
+        const totalLabel = document.getElementById("calc-total-price");
+        const orderBtn = document.getElementById("order-whatsapp-btn");
+
+        function updateCalculator() {
+          let selectedRadio = document.querySelector('input[name="calc-service"]:checked');
+          let serviceKey = selectedRadio ? selectedRadio.value : "sekolah";
+          let baseService = services[serviceKey];
+          let grandTotal = baseService.price;
+
+          summaryName.innerText = baseService.name;
+          summaryPrice.innerText = formatIDR(grandTotal);
+          animatePriceText(grandTotal);
+
+          // Build customized, high-converting WhatsApp message
+          let baseMessage = `Halo Arivanta Digital, saya tertarik dengan layanan Anda. Berikut hasil perhitungan dari Kalkulator Estimasi Website (Paket Pedesaan/Ramah Kantong):\n\n`;
+          baseMessage += `- Layanan Utama: *${baseService.name}* (${formatIDR(grandTotal)})\n\n`;
+          baseMessage += `*TOTAL PERKIRAAN BIAYA:* *${formatIDR(grandTotal)}*\n\nMohon informasi lanjut & bimbingan pengelolaannya. Terima kasih.`;
+
+          orderBtn.setAttribute("href", `https://wa.me/62882000193986?text=${encodeURIComponent(baseMessage)}`);
+        }
+
+        let currentPriceValue = 1200000;
+        function animatePriceText(targetVal) {
+          let duration = 500;
+          let start = performance.now();
+          let initialVal = currentPriceValue;
+
+          function step(timestamp) {
+            let progress = Math.min((timestamp - start) / duration, 1);
+            let current = Math.floor(initialVal + (targetVal - initialVal) * progress);
+            totalLabel.innerText = formatIDR(current);
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              currentPriceValue = targetVal;
+            }
+          }
+          requestAnimationFrame(step);
+        }
+
+        function formatIDR(val) {
+          return "Rp" + val.toLocaleString("id-ID");
+        }
+
+        radios.forEach((rad) => rad.addEventListener("change", updateCalculator));
+        updateCalculator();
+      }
+
+      /* FAQ SMOOTH EXPANDABLE ACCORDION */
+      function initFAQAccordions() {
+        const faqs = document.querySelectorAll("[data-faq]");
+
+        faqs.forEach((faq) => {
+          const button = faq.querySelector("button");
+          const content = faq.querySelector(".faq-content");
+          const icon = faq.querySelector(".faq-icon-wrapper");
+
+          button.addEventListener("click", () => {
+            const isOpen = faq.classList.contains("faq-open");
+
+            faqs.forEach((otherFaq) => {
+              otherFaq.classList.remove("faq-open", "border-brand-cyan/30");
+              otherFaq.querySelector(".faq-content").style.maxHeight = "0";
+              otherFaq.querySelector(".faq-icon-wrapper").style.transform = "rotate(0deg)";
+            });
+
+            if (!isOpen) {
+              faq.classList.add("faq-open", "border-brand-cyan/30");
+              content.style.maxHeight = content.scrollHeight + "px";
+              icon.style.transform = "rotate(180deg)";
+            }
+          });
+        });
+      }
+
+      /* DYNAMIC CONSULTATION FORM LINK TO WHATSAPP */
+      function initConsultationForm() {
+        const form = document.getElementById("consultation-form");
+        const errorToast = document.getElementById("form-error-toast");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          errorToast.classList.add("hidden");
+
+          const name = document.getElementById("form-name").value.trim();
+          const whatsapp = document.getElementById("form-whatsapp").value.trim();
+          const service = document.getElementById("form-service").value;
+          const message = document.getElementById("form-message").value.trim();
+
+          if (!name || !whatsapp || !service || !message) {
+            errorToast.innerText = "Mohon isi semua formulir secara lengkap.";
+            errorToast.classList.remove("hidden");
+            return;
+          }
+
+          let parseMsg = `Halo Arivanta Digital, saya tertarik dengan layanan Anda. Berikut detail formulir konsultasi saya:\n\n`;
+          parseMsg += `- Nama Lengkap: *${name}*\n`;
+          parseMsg += `- Nomor WhatsApp: *${whatsapp}*\n`;
+          parseMsg += `- Jenis Layanan: *${service}*\n`;
+          parseMsg += `- Pesan Tambahan: "${message}"\n\n`;
+          parseMsg += `Mohon segera direspon untuk perencanaan pengerjaan proyek kami. Terima kasih.`;
+
+          const finalWhatsAppUrl = `https://wa.me/62882000193986?text=${encodeURIComponent(parseMsg)}`;
+          window.open(finalWhatsAppUrl, "_blank");
+        });
+      }
+
+      /* BACK TO TOP BUTTON TOGGLE */
+      function initBackToTopButton() {
+        const btn = document.getElementById("back-to-top-btn");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 400) {
+            btn.classList.remove("hidden");
+            setTimeout(() => btn.classList.add("opacity-100"), 50);
+          } else {
+            btn.classList.add("hidden");
+            btn.classList.remove("opacity-100");
+          }
+        });
+
+        btn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+    </script>
+  </body>
+</html>
